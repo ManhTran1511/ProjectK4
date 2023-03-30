@@ -80,6 +80,11 @@ public class HomeController {
         return "admin_templates/staff";
     }
 
+    @GetMapping("booking")
+    public String booking(Model model) {
+        return "admin_templates/booking_index";
+    }
+
 //    @GetMapping("staff/booking")
 //    public String booking(Model model) {
 //        return "admin_templates/booking_add_form";

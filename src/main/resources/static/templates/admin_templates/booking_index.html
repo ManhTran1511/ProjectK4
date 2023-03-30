@@ -371,44 +371,65 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
+          <div class="fw-bold py-3 mb-4">
+            <h4>
+              <span class="text-muted fw-light">Admin /</span> Booking Manager
+            </h4>
 
-          <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/admin/ban/add}" th:object="${ban}" method="post">
-            <div class="card mb-4">
-              <h5 class="card-header">Form Controls</h5>
-              <div class="card-body">
-                <div class="form-group mb-3">
-                  <label for="loaiBan" class="form-label">Table Type</label>
-                  <select class="form-select" th:field="*{loaiBan}" id="loaiBan" aria-label="Default select example">
-                    <option value="Ban2" selected>Ban2</option>
-                    <option value="Ban4">Ban4</option>
-                  </select>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="trangThai" class="form-label">Status</label>
-                  <select class="form-select" th:field="*{trangThai}"
-                          id="trangThai"
-                          aria-label="Default select example"
-                          hidden>
-
-                    <option value="1" selected>Trong</option>
-
-                  </select>
-                  <input
-                          class="form-control"
-                          placeholder="Trong"
-                          readonly
-                  />
-
-                </div>
-                <div class="form-group">
-                  <input type="submit" value="Add Table" class="btn btn-primary form-control">
-                  <a th:href="@{/admin/ban}" class="btn btn-secondary form-control">Cancel</a>
-                </div>
-              </div>
+            <a class="btn btn-outline-info" th:href="@{/staff/booking/new}">
+              <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Add New
+            </a>
+          </div>
+          <!-- Striped Rows -->
+          <div class="card">
+            <h5 class="card-header">Bookings Manager</h5>
+            <div class="table-responsive text-nowrap">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Ten Khach Hang</th>
+                  <th>Sdt</th>
+                  <th>Ngay Dat</th>
+                  <th>Gio Dat</th>
+                  <th>So Nguoi</th>
+                  <th>Tai Khoan</th>
+                  <th>Ban</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                <tr th:each="booking : ${allBookings}">
+                  <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${booking.id}"> </strong></td>
+                  <td th:text="${booking.tenKhachHang}"></td>
+                  <td th:text="${booking.sdt}"></td>
+                  <td th:text="${booking.ngayDat}"></td>
+                  <td th:text="${booking.gioDat}"></td>
+                  <td th:text="${booking.soNguoi}"></td>
+                  <td th:text="${booking.taiKhoan_id}"></td>
+                  <td th:text="${booking.ban_id}"></td>
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+                        <a class="dropdown-item"
+                           th:href="@{/staff/booking/edit/{id}(id=${booking.id})}">
+                          <i class="bx bx-edit-alt me-1"></i> Edit</a
+                        >
+                        <a class="dropdown-item"
+                           th:href="@{/staff/booking/delete/{id}(id=${booking.id})}">
+                          <i class="bx bx-trash me-1"></i> Delete</a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
             </div>
-          </form>
+          </div>
+          <!--/ Striped Rows -->
 
           <hr class="my-5" />
         </div>

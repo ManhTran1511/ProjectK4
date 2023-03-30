@@ -1,6 +1,9 @@
 package com.fpt.edu.models;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 @Entity
@@ -11,9 +14,10 @@ public class BanDat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int ban_id;
-    private int taiKhoan_id;
     private String tenKhachHang;
+    private int ban_id;
+
+    private int taiKhoan_id;
     private String sdt;
     private String gioDat;
 

@@ -57,7 +57,7 @@ public class CategoryController {
     }
 
     @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid Category cate,
+    public String updateCate(@PathVariable("id") long id, @Valid Category cate,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             cate.setId(id);
@@ -69,7 +69,7 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteTable(@PathVariable("id") long id, Model model) {
+    public String deleteCate(@PathVariable("id") long id, Model model) {
         Category cate = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category Id:" + id));
         categoryRepository.delete(cate);

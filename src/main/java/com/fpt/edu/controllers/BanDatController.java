@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.sql.Time;
@@ -24,13 +22,13 @@ public class BanDatController {
     @Autowired
     BanDatRepository banDatRepository;
     @ModelAttribute("allBookings")
-    public List<BanDat> populateTypes() {
+    public List<BanDat> bookingList() {
         return banDatRepository.findAll();
     }
 
     @RequestMapping(value = "")
     public String bookingManager(Model model) {
-        return "admin_templates/booking_add_form";
+        return "admin_templates/booking_index";
     }
 
     @RequestMapping(value = "/new")
@@ -39,7 +37,7 @@ public class BanDatController {
         Date now = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(now);
-        model.addAttribute("booking", banDat);
+        model.addAttribute("banDat", banDat);
         model.addAttribute("date", c);
         return "admin_templates/booking_add_form";
     }
@@ -51,6 +49,36 @@ public class BanDatController {
             return "admin_templates/booking_add_form";
         }
         banDatRepository.save(banDat);
-        return "redirect:/staff";
+        return "redirect:/staff/booking";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") long id, Model model) {
+        BanDat banDat = banDatRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Booking Id:" + id));
+
+        model.addAttribute("banDat", banDat);
+        model.addAttribute("allBookings", banDatRepository.findAll());
+        return "admin_templates/booking_edit_form";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateBooking(@PathVariable("id") long id, @Valid BanDat banDat,
+                             BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            banDat.setId(id);
+            return "admin_templates/booking_edit_form";
+        }
+
+        banDatRepository.save(banDat);
+        return "redirect:/staff/booking";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteTable(@PathVariable("id") long id, Model model) {
+        BanDat banDat = banDatRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Booking Id:" + id));
+        banDatRepository.delete(banDat);
+        return "redirect:/staff/booking";
     }
 }

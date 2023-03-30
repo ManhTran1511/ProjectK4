@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!DOCTYPE html>
 <html
         lang="en"
         class="light-style layout-menu-fixed"
@@ -374,37 +381,69 @@
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
 
           <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/admin/ban/add}" th:object="${ban}" method="post">
+          <form class="col-md-6" th:action="@{/staff/booking/update/{id}(id=${banDat.id})}" th:object="${banDat}" method="post">
             <div class="card mb-4">
               <h5 class="card-header">Form Controls</h5>
               <div class="card-body">
                 <div class="form-group mb-3">
-                  <label for="loaiBan" class="form-label">Table Type</label>
-                  <select class="form-select" th:field="*{loaiBan}" id="loaiBan" aria-label="Default select example">
-                    <option value="Ban2" selected>Ban2</option>
-                    <option value="Ban4">Ban4</option>
-                  </select>
+                  <label for="ngayDat" class="col-md-2 col-form-label">Date</label>
+                  <div class="form-group mb-3">
+                    <input class="form-control" type="date"
+                           th:field="*{ngayDat}"
+                           th:value="${banDat.ngayDat}"
+                           id="ngayDat" />
+                  </div>
+                  <span th:if="${#fields.hasErrors('ngayDat')}" th:errors="*{ngayDat}"></span>
                 </div>
                 <div class="form-group mb-3">
-                  <label for="trangThai" class="form-label">Status</label>
-                  <select class="form-select" th:field="*{trangThai}"
-                          id="trangThai"
-                          aria-label="Default select example"
-                          hidden>
-
-                    <option value="1" selected>Trong</option>
-
-                  </select>
-                  <input
-                          class="form-control"
-                          placeholder="Trong"
-                          readonly
-                  />
-
+                  <label for="gioDat" class="form-label">Time</label>
+                  <div class="form-group mb-3">
+                    <input class="form-control" type="time"
+                           th:value="${banDat.gioDat}"
+                           th:field="*{gioDat}" id="gioDat" />
+                  </div>
+                  <span th:if="${#fields.hasErrors('gioDat')}" th:errors="*{gioDat}"></span>
                 </div>
+                <div class="form-group mb-3">
+                  <label for="soNguoi" class="form-label">People</label>
+                  <!-- Select2 -->
+                  <select class="selection-1 form-select" name="soNguoi" th:field="*{soNguoi}" id="soNguoi" aria-label="Default select example">
+                    <option th:value="${banDat.soNguoi}" selected></option>
+                    <option value="1">1 person</option>
+                    <option value="2">2 people</option>
+                    <option value="3">3 people</option>
+                    <option value="4">4 people</option>
+                    <option value="5">5 people</option>
+                    <option value="6">6 people</option>
+                  </select>
+                  <span th:if="${#fields.hasErrors('soNguoi')}" th:errors="*{soNguoi}"></span>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="tenKhachHang" class="form-label">Customer's Name</label>
+                  <input
+                          type="text"
+                          class="form-control"
+                          th:field="*{tenKhachHang}"
+                          id="tenKhachHang"
+                          th:placeholder="${banDat.tenKhachHang}"
+                  />
+                  <span th:if="${#fields.hasErrors('tenKhachHang')}" th:errors="*{tenKhachHang}"></span>
+                </div>
+                <div class="mb-3">
+                  <label for="sdt" class="form-label">Phone Number</label>
+                  <input
+                          type="text"
+                          class="form-control"
+                          th:field="*{sdt}"
+                          id="sdt"
+                          th:placeholder="${banDat.sdt}"
+                  />
+                  <span th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></span>
+                </div>
+
                 <div class="form-group">
-                  <input type="submit" value="Add Table" class="btn btn-primary form-control">
-                  <a th:href="@{/admin/ban}" class="btn btn-secondary form-control">Cancel</a>
+                  <input type="submit" value="Update Booking" class="btn btn-primary form-control">
+                  <a th:href="@{/admin/staff}" class="btn btn-secondary form-control">Cancel</a>
                 </div>
               </div>
             </div>
@@ -487,5 +526,8 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>
+
 </body>
 </html>
