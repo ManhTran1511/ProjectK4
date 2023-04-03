@@ -59,7 +59,7 @@ public class AuthController {
   }
 
   @GetMapping("/login")
-  public String login(){
+  public String login() {
     return "/account_templates/login";
   }
 }

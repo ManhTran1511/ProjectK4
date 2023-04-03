@@ -27,6 +27,11 @@
   </div>
 </nav>
 <div class="container">
+  <div th:if="${param.success}">
+    <div class="alert alert-success">
+      You have successfully login our app!
+    </div>
+  </div>
   <div class="row col-md-10">
     <h2>List of Registered Users</h2>
   </div>
