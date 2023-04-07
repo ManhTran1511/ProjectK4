@@ -1,5 +1,10 @@
 package com.fpt.edu.controllers;
 
+import com.fpt.edu.models.Contact;
+import com.fpt.edu.repository.CategoryRepository;
+import com.fpt.edu.repository.ContactRepository;
+import com.fpt.edu.repository.FoodRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,9 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "")
 public class HomeController {
 
+    @Autowired
+    FoodRepository foodRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    ContactRepository contactRepository;
+
     // USER ROUTES
     @GetMapping("home")
     public String home(Model model) {
+        model.addAttribute("listContact", contactRepository.findAll());
         return "index";
     }
 
@@ -22,6 +37,8 @@ public class HomeController {
 
     @GetMapping("menu")
     public String menu(Model model) {
+        model.addAttribute("listFood", foodRepository.findAll());
+        model.addAttribute("listCate", categoryRepository.findAll());
         return "user_templates/menu";
     }
 

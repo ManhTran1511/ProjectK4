@@ -1,4 +1,7 @@
 package com.fpt.edu.repository;
 
-public interface MenuRepository {
+import com.fpt.edu.models.Food;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MenuRepository extends JpaRepository<Food, Long> {
 }
