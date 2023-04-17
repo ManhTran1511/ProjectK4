@@ -1,7 +1,9 @@
 package com.fpt.edu.controllers;
 
 import com.fpt.edu.models.UserDto;
+import com.fpt.edu.repository.UserRepository;
 import com.fpt.edu.security.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,9 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AuthController {
   private UserService userService;
+
+  @Autowired
+  UserRepository userRepository;
 
   public AuthController(UserService userService) {
     this.userService = userService;
@@ -48,7 +53,7 @@ public class AuthController {
     }
 
     userService.saveUser(userDto);
-    return "redirect:/api/auth/register?success";
+    return "redirect:/api/auth/login?success";
   }
 
   @GetMapping("/users")
@@ -61,5 +66,15 @@ public class AuthController {
   @GetMapping("/login")
   public String login() {
     return "/account_templates/login";
+  }
+
+  @GetMapping("/profile/{id}")
+  public String profile(@PathVariable("id") long id, Model model){
+    User user = userRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("Invalid User Id:" + id));
+
+    model.addAttribute("user", user);
+    model.addAttribute("allUsers", userRepository.findAll());
+    return "/account_templates/my_profile";
   }
 }

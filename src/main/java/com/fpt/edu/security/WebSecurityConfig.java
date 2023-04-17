@@ -3,6 +3,7 @@ package com.fpt.edu.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,20 +26,30 @@ public class WebSecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.cors().and().csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.authorizeRequests().antMatchers("/api/auth/**", "/login", "/register").permitAll()
-				.antMatchers("/api/test/**").permitAll()
-				.antMatchers("/**").permitAll()
-				.antMatchers("/api/test/users").hasRole("ADMIN")
-				.anyRequest().authenticated().and()
+//		http.cors().and().csrf().disable()
+//				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//				.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+//				.antMatchers("/**").permitAll()
+//				.antMatchers("/api/test/**").permitAll()
+//				.antMatchers("/user/**").permitAll()
+//				.antMatchers("/account/**").permitAll()
+//				.antMatchers("/admin/**").permitAll()
+//				.antMatchers("/","/home","/menu","/reservation","/gallery","/about","/blog","/contact","/admin").permitAll()
+//				.antMatchers("/admin/**").hasRole("ADMIN")
+//				.anyRequest().authenticated()
+//				.and()
+
+		http.csrf().disable()
+				.authorizeHttpRequests((authorize) ->
+						authorize.antMatchers("/api/auth/**").permitAll()
+								.antMatchers("/index").permitAll()
+								.antMatchers("/admin/**").hasRole("ADMIN"))
 				.formLogin(
 						form -> form
 								.loginPage("/api/auth/login")
 								.loginProcessingUrl("/api/auth/login")
-								.defaultSuccessUrl("/api/auth/users?success")
+								.defaultSuccessUrl("/admin?success").permitAll()
 								.failureUrl("/api/auth/login?error")
-								.permitAll()
 				).logout(
 						logout -> logout
 								.logoutRequestMatcher(new AntPathRequestMatcher("/api/auth/logout"))

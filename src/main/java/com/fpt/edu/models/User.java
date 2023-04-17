@@ -35,10 +35,15 @@ public class User {
 	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(
 			name="users_roles",
-			joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-			inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+			joinColumns={@JoinColumn(name="user_id", referencedColumnName="ID")},
+			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="ID")})
 	private List<Role> roles = new ArrayList<>();
-
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(
+//			name="users_roles",
+//			joinColumns={@JoinColumn(name="user_id", referencedColumnName="ID")},
+//			inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="ID")})
+//	private Set<Role> roles = new HashSet<>();
 
 	public User() {
 	}
@@ -88,4 +93,11 @@ public class User {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
+//	public Set<Role> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(Set<Role> roles) {
+//		this.roles = roles;
+//	}
 }
