@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.fpt.edu.models.User;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -24,10 +26,10 @@ public class AuthController {
     this.userService = userService;
   }
 
-  @GetMapping("/index")
-  public String home(){
-    return "index";
-  }
+//  @GetMapping("/index")
+//  public String home(){
+//    return "index";
+//  }
 
   @GetMapping("/register")
   public String showRegistrationForm(Model model){
@@ -67,6 +69,14 @@ public class AuthController {
   public String login() {
     return "/account_templates/login";
   }
+
+//  @RequestMapping("/default")
+//  public String defaultAfterLogin(HttpServletRequest request) {
+//    if (request.isUserInRole("ROLE_ADMIN")) {
+//      return "redirect:/admin";
+//    }
+//    return "redirect:/index";
+//  }
 
   @GetMapping("/profile/{id}")
   public String profile(@PathVariable("id") long id, Model model){

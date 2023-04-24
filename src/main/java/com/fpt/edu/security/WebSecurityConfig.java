@@ -48,7 +48,7 @@ public class WebSecurityConfig {
 						form -> form
 								.loginPage("/api/auth/login")
 								.loginProcessingUrl("/api/auth/login")
-								.defaultSuccessUrl("/admin?success").permitAll()
+								.defaultSuccessUrl("/default?success").permitAll()
 								.failureUrl("/api/auth/login?error")
 				).logout(
 						logout -> logout
