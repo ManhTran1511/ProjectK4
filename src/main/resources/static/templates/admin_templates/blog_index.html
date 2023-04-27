@@ -167,7 +167,7 @@
                     <span class="menu-header-text">Menu Manager</span>
                 </li>
 
-                <!-- Category -->
+                <!-- Blog -->
                 <li class="menu-item">
                     <a th:href="@{/admin/cate}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -190,7 +190,7 @@
 
                 <!-- Invoice -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                    <a th:href="@{/admin/ban/invoices}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Invoices</div>
                     </a>
@@ -203,7 +203,7 @@
 
                 <!-- Customer Account -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                    <a th:href="@{/admin/ban/account}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Customer Account</div>
                     </a>
@@ -211,7 +211,7 @@
 
                 <!-- Customer Rate -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                    <a th:href="@{/admin/ban/rate}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Customer Rate</div>
                     </a>
@@ -224,7 +224,7 @@
 
                 <!-- Contact -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/contact}" class="menu-link">
+                    <a th:href="@{/admin/contact}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Contact</div>
                     </a>
@@ -232,7 +232,7 @@
 
                 <!-- Blog -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/blog}" class="menu-link">
+                    <a th:href="@{/admin/blog}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Blog</div>
                     </a>
@@ -251,14 +251,6 @@
                     <a th:href="@{/admin/ban/about}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">About</div>
-                    </a>
-                </li>
-
-                <!-- Chef -->
-                <li class="menu-item">
-                    <a th:href="@{/admin/ban/chef}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Analytics">Chef</div>
                     </a>
                 </li>
 
@@ -310,7 +302,7 @@
                         </li>
 
                         <!-- User -->
-                        <li class="nav-item navbar-dropdown dropdown-user dropdown" >
+                        <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
                                     <img src="/admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -360,7 +352,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" th:href="@{/api/auth/logout}">
+                                    <a class="dropdown-item" href="auth-login-basic.html">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>
@@ -381,35 +373,33 @@
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="fw-bold py-3 mb-4">
                         <h4>
-                            <span class="text-muted fw-light">Admin /</span> Chef Manager
+                            <span class="text-muted fw-light">Admin /</span> Blog Manager
                         </h4>
 
-                        <a class="btn btn-outline-info" th:href="@{/admin/chef/new}">
+                        <a class="btn btn-outline-info" th:href="@{/admin/blog/new}">
                             <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Add New
                         </a>
                     </div>
                     <!-- Striped Rows -->
                     <div class="card">
-                        <h5 class="card-header">Chefs Manager</h5>
+                        <h5 class="card-header">Blogs Manager</h5>
                         <div class="table-responsive text-nowrap">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Img</th>
                                     <th>Name</th>
-                                    <th>Chef</th>
-                                    <th>Description</th>
+                                    <th>Content</th>
+                                    <th>Image</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
-                                <tr th:each="chef : ${allChefs}">
-                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${chef.id}"> </strong></td>
-                                    <td><img th:src="${chef.img}" style="width: 90px; height: 90px"></td>
-                                    <td th:text="${chef.name}"></td>
-                                    <td th:text="${chef.chef}"></td>
-                                    <td th:text="${chef.description}"></td>
+                                <tr th:each="blog : ${allBlogs}">
+                                    <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${blog.id}"> </strong></td>
+                                    <td th:text="${blog.name}"></td>
+                                    <td th:text="${blog.content}"></td>
+                                    <td th:text="${blog.image}"></td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -417,12 +407,13 @@
                                             </button>
                                             <div class="dropdown-menu">
                                                 <a class="dropdown-item"
-                                                   th:href="@{/admin/chef/edit/{id}(id=${chef.id})}">
+                                                   th:href="@{/admin/blog/edit/{id}(id=${blog.id})}">
                                                     <i class="bx bx-edit-alt me-1"></i> Edit</a
                                                 >
                                                 <a class="dropdown-item"
-                                                   th:href="@{/admin/chef/delete/{id}(id=${chef.id})}">
-                                                    <i class="bx bx-trash me-1"></i> Delete</a>
+                                                   th:href="@{/admin/blog/delete/{id}(id=${blog.id})}">
+                                                    <i class="bx bx-trash me-1"></i> Delete</a
+                                                >
                                             </div>
                                         </div>
                                     </td>

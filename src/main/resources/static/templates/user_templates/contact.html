@@ -46,7 +46,7 @@
                 <!-- Logo -->
                 <div class="logo">
                     <a href="home">
-                        <img src="/user/images/icons/logo.png" alt="IMG-LOGO" data-logofixed="/images/icons/logo2.png">
+                        <img src="/user/images/icons/logo.png" alt="IMG-LOGO" data-logofixed="/user/images/icons/logo2.png">
                     </a>
                 </div>
 
@@ -90,6 +90,7 @@
                     <a href="https://www.tripadvisor.com/"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
                     <a href="https://www.facebook.com/"><i class="fa fa-facebook m-l-21" aria-hidden="true"></i></a>
                     <a href="https://twitter.com/"><i class="fa fa-twitter m-l-21" aria-hidden="true"></i></a>
+                    <a th:href="@{/api/auth/login}"><i class="fa fa-user-circle-o m-l-21" aria-hidden="true"></i></a>
 
                     <button class="btn-show-sidebar m-l-33 trans-0-4"></button>
                 </div>
@@ -189,7 +190,7 @@
 <!-- Title Page -->
 <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(/user/images/bg-title-page-02.jpg);">
     <h2 class="tit6 t-center">
-        Contact
+        customer's feedback
     </h2>
 </section>
 
@@ -208,8 +209,8 @@
         <h3 class="tit7 t-center p-b-62 p-t-105">
             Send us a Message
         </h3>
-
-        <form class="wrap-form-reservation size22 m-l-r-auto">
+<!--xu ly vao admin contact_check -->
+        <form class="wrap-form-reservation size22 m-l-r-auto" th:action="@{/admin/contact_check/add}" th:object="${contact_check}" method="post">
             <div class="row">
                 <div class="col-md-4">
                     <!-- Name -->
@@ -218,7 +219,8 @@
 						</span>
 
                     <div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                        <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Name">
+                        <input class="bo-rad-10 sizefull txt10 p-l-20" type="text"
+                               th:field="*{name}" name="name" placeholder="Name">
                     </div>
                 </div>
 
@@ -229,7 +231,8 @@
 						</span>
 
                     <div class="wrap-inputemail size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                        <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Email">
+                        <input class="bo-rad-10 sizefull txt10 p-l-20"
+                               th:field="*{email}" type="email" name="email" placeholder="Email">
                     </div>
                 </div>
 
@@ -240,7 +243,8 @@
 						</span>
 
                     <div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                        <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="phone" placeholder="Phone">
+                        <input class="bo-rad-10 sizefull txt10 p-l-20"
+                               th:field="*{phone}" type="text" name="phone" placeholder="Phone">
                     </div>
                 </div>
 
@@ -249,7 +253,8 @@
                     <span class="txt9">
 							Message
 						</span>
-                    <textarea class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3" name="message" placeholder="Message"></textarea>
+                    <textarea class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3"
+                              th:field="*{comment}" name="message" placeholder="Message"></textarea>
                 </div>
             </div>
 

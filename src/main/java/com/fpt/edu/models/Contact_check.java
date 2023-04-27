@@ -3,8 +3,8 @@ package com.fpt.edu.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "contact")
-public class Contact {
+@Table(name = "contact_check")
+public class Contact_check {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,7 +13,7 @@ public class Contact {
     private String phone;
     private String comment;
 
-    public Contact(){
+    public Contact_check(){
 
     }
 
