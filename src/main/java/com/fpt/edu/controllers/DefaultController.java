@@ -18,6 +18,9 @@ public class DefaultController {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin";
         }
+        if (request.isUserInRole("ROLE_STAFF")) {
+            return "redirect:/staff";
+        }
         return "redirect:/index";
     }
 }
