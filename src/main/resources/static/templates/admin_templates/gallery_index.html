@@ -409,7 +409,8 @@
                                     </td>
                                     <td th:text="${gallery.name}"></td>
                                     <td>
-                                        <img th:src="${'/admin/images/' + gallery.image}" style="height: 90px; width: 90px"/>
+<!--                                        <img th:src="${'/admin/images/' + gallery.image}" style="height: 90px; width: 90px"/>-->
+                                        <img th:src="${'/admin/gallery/files/' + gallery.image}" style="height: 90px; width: 90px"/>
                                     </td>
 
                                     <td>
