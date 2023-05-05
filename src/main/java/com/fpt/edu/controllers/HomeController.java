@@ -3,15 +3,23 @@ package com.fpt.edu.controllers;
 import com.fpt.edu.models.Blog;
 import com.fpt.edu.models.Contact;
 import com.fpt.edu.models.Contact_check;
+import com.fpt.edu.models.Gallery;
 import com.fpt.edu.repository.*;
+import com.fpt.edu.security.storage.StorageFileNotFoundException;
+import com.fpt.edu.security.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "")
@@ -20,6 +28,8 @@ public class HomeController {
     @Autowired
     FoodRepository foodRepository;
 
+    @Autowired
+    GalleryRepository galleryRepository;
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -35,9 +45,17 @@ public class HomeController {
     @Autowired
     BlogRepository blogRepository;
 
+    private final StorageService storageService;
+
+    @Autowired
+    public HomeController(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
+
     // USER ROUTES
     @GetMapping("home")
-    public String home(Model model) {
+    public String home(Model model) throws IOException {
         List<Blog> list3Blogs = new ArrayList<>();
         int count = 0;
 
@@ -50,8 +68,41 @@ public class HomeController {
             }
         }
 
-        model.addAttribute("list3Blogs", blogRepository.findAll());
-        model.addAttribute("listContact", contactRepository.findAll());        return "index";
+        List<Gallery> list3Galleries = new ArrayList<>();
+        int countGallery = 0;
+
+        for(Gallery gallery : galleryRepository.findAll()){
+            if (countGallery < 3){
+                list3Galleries.add(gallery);
+                countGallery = countGallery + 1;
+            } else {
+                break;
+            }
+        }
+
+        storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(HomeController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList());
+
+        model.addAttribute("list3Blogs", list3Blogs);
+        model.addAttribute("listContact", contactRepository.findAll());
+        model.addAttribute("list3Galleries",list3Galleries );
+        return "index";
+    }
+
+    @GetMapping("/files/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+    }
+
+    @ExceptionHandler(StorageFileNotFoundException.class)
+    public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("reservation")
@@ -61,6 +112,10 @@ public class HomeController {
 
     @GetMapping("menu")
     public String menu(Model model) {
+        storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(HomeController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList());
         model.addAttribute("listFood", foodRepository.findAll());
         model.addAttribute("listCate", categoryRepository.findAll());
         return "user_templates/menu";
@@ -68,6 +123,11 @@ public class HomeController {
 
     @GetMapping("gallery")
     public String gallery(Model model) {
+        storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(HomeController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList());
+        model.addAttribute("listGalleries", galleryRepository.findAll());
         return "user_templates/gallery";
     }
 
@@ -79,6 +139,10 @@ public class HomeController {
 
     @GetMapping("blog")
     public String blog(Model model) {
+        storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(HomeController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList());
         model.addAttribute("listBlog", blogRepository.findAll());
         return "user_templates/blog";
     }

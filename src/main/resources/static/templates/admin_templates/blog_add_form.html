@@ -230,6 +230,14 @@
                     </a>
                 </li>
 
+                <!-- Contact_check -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/contact_check}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Contact_check</div>
+                    </a>
+                </li>
+
                 <!-- Blog -->
                 <li class="menu-item">
                     <a th:href="@{/admin/blog}" class="menu-link">
@@ -374,7 +382,8 @@
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
 
                     <!-- Form controls -->
-                    <form class="col-md-6" th:action="@{/admin/blog/add}" th:object="${blog}" method="post">
+                    <form class="col-md-6" th:action="@{/admin/blog/add}" th:object="${blog}"
+                          method="post" enctype="multipart/form-data">
                         <div class="card mb-4">
                             <h5 class="card-header">Form Controls</h5>
                             <div class="card-body">
@@ -404,19 +413,20 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Image</label>
+                                    <label for="file" class="form-label">Image</label>
                                     <input
-                                            type="text"
+
+                                            type="file"
                                             class="form-control"
-                                            th:field="*{image}"
-                                            id="image"
-                                            placeholder="image"
+                                            id="file"
+                                            placeholder="file"
+                                            name="file"
                                     />
-                                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+<!--                                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>-->
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Add Blog" class="btn btn-primary form-control">
-                                    <a th:href="@{/admin/ban}" class="btn btn-secondary form-control">Cancel</a>
+                                    <a th:href="@{/admin/blog}" class="btn btn-secondary form-control">Cancel</a>
                                 </div>
                             </div>
                         </div>

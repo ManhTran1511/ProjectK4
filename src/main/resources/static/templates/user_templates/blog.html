@@ -79,7 +79,7 @@
                             </li>
 
                             <li>
-                                <a href="contact">Contact</a>
+                                <a href="contact">Feedback</a>
                             </li>
                         </ul>
                     </nav>
@@ -219,31 +219,15 @@
                     <div class="blo4 p-b-63"
                          th:each="blog : ${listBlog}">
                         <div class="pic-blo4 hov-img-zoom bo-rad-10 pos-relative">
-                            <a href="#"
-                               th:text="${blog.image}">
-                                <img src="#" alt="IMG-BLOG">
-                            </a>
+                            <img th:src="${'/files/' + blog.image}" alt="IMG-INTRO"/>
 
                         </div>
 
                         <div class="text-blo4 p-t-33" th:text="${blog.name}">
-                            <h4 class="p-b-16">
-                                <a href="blog-detail.html" class="tit9"></a>
-                            </h4>
-
-                            <div class="txt32 flex-w p-b-24">
-
-                            </div>
-
-                            <span class="info-item-mainmenu txt23"
-                                  th:text="${blog.content}">
-                        </span>
-
-<!--                            <a href="blog-detail.html" class="dis-block txt4 m-t-30">-->
-<!--                                Continue Reading-->
-<!--                                <i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>-->
-<!--                            </a>-->
                         </div>
+                        <p class="m-b-20"
+                           th:text="${blog.content}">
+                        </p>
                     </div>
 
 <!--                    &lt;!&ndash; Block4 &ndash;&gt;-->

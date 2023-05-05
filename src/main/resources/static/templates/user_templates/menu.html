@@ -79,7 +79,7 @@
                             </li>
 
                             <li>
-                                <a href="contact">Contact</a>
+                                <a href="contact">Feedback</a>
                             </li>
                         </ul>
                     </nav>
@@ -244,11 +244,11 @@
         <div class="row p-t-108 p-b-70">
             <div class="col-md-8 col-lg-6 m-l-r-auto"
                  th:each="food : ${listFood}"
-                 th:if="${cate.id == food.id}">
+                 th:if="${cate.id == food.cate_id}">
                 <!-- Block3 -->
                 <div class="blo3 flex-w flex-col-l-sm m-b-30">
                     <div class="pic-blo3 size20 bo-rad-10 hov-img-zoom m-r-28">
-                        <a href="#"><img src="/user/images/lunch-01.jpg" alt="IMG-MENU"></a>
+                        <img th:src="${'/files/' + food.image}" alt="IMG-INTRO"/>
                     </div>
 
                     <div class="text-blo3 size21 flex-col-l-m">

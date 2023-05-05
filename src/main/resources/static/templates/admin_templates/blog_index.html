@@ -8,6 +8,7 @@
         data-template="vertical-menu-template-free"
 >
 <head>
+
     <meta charset="utf-8" />
     <meta
             name="viewport"
@@ -230,6 +231,14 @@
                     </a>
                 </li>
 
+                <!-- Contact_check -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/contact_check}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Contact_check</div>
+                    </a>
+                </li>
+
                 <!-- Blog -->
                 <li class="menu-item">
                     <a th:href="@{/admin/blog}" class="menu-link">
@@ -399,7 +408,9 @@
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${blog.id}"> </strong></td>
                                     <td th:text="${blog.name}"></td>
                                     <td th:text="${blog.content}"></td>
-                                    <td th:text="${blog.image}"></td>
+                                    <td>
+                                        <img th:src="${'/admin/blog/files/' + blog.image}" style="height: 90px; width: 90px"/>
+                                    </td>
                                     <td>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

@@ -51,9 +51,7 @@ public class GalleryController {
 
     @RequestMapping(value = "/new")
     public String addForm(Model model) throws IOException {
-
         Gallery gallery = new Gallery();
-
         model.addAttribute("gallery", gallery);
         return "admin_templates/gallery_add_form";
     }
