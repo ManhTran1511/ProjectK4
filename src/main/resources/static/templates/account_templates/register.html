@@ -89,6 +89,7 @@
                                         class="form-control"
                                         th:field="*{password}"
                                         required
+
                                 />
                                 <p th:errors = "*{password}" class="text-danger"
                                    th:if="${#fields.hasErrors('password')}"></p>

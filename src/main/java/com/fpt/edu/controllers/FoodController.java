@@ -1,5 +1,6 @@
 package com.fpt.edu.controllers;
 
+import com.fpt.edu.models.Blog;
 import com.fpt.edu.models.Category;
 import com.fpt.edu.models.Food;
 import com.fpt.edu.repository.CategoryRepository;
@@ -103,11 +104,22 @@ public class FoodController {
 
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid Food food,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model,
+                             @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             food.setId(id);
             return "admin_templates/food_edit_form";
         }
+        Food oldFood = foodRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Food Id:" + id));
+
+        if (!file.isEmpty()){
+            storageService.store(file);
+            food.setImage(file.getOriginalFilename());
+        } else {
+            food.setImage(oldFood.getImage());
+        }
+
 
         foodRepository.save(food);
         return "redirect:/admin/food";

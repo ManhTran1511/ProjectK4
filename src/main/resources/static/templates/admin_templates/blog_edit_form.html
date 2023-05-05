@@ -382,7 +382,8 @@
                     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
 
                     <!-- Form controls -->
-                    <form class="col-md-6" th:action="@{/admin/blog/update/{id}(id=${blog.id})}" th:object="${blog}" method="post">
+                    <form class="col-md-6" th:action="@{/admin/blog/update/{id}(id=${blog.id})}" th:object="${blog}"
+                          method="post" enctype="multipart/form-data">
                         <div class="card mb-4">
                             <h5 class="card-header">Form Controls</h5>
                             <div class="card-body">
@@ -412,15 +413,16 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Image</label>
+                                    <label for="file" class="form-label">Image</label>
                                     <input
-                                            type="text"
+                                            type="file"
                                             class="form-control"
-                                            th:field="*{image}"
-                                            id="image"
-                                            placeholder="image"
+                                            id="file"
+                                            placeholder="file"
+                                            name="file"
                                     />
-                                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                                    <img th:src="${'/admin/blog/files/' + blog.image}" style="height: 90px; width: 90px"/>
+<!--                                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>-->
                                 </div>
 
                                 <div class="form-group">
