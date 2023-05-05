@@ -1,5 +1,6 @@
 package com.fpt.edu.controllers;
 
+import com.fpt.edu.models.Blog;
 import com.fpt.edu.models.UserDto;
 import com.fpt.edu.repository.UserRepository;
 import com.fpt.edu.security.services.UserService;
@@ -10,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.fpt.edu.models.User;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -85,6 +85,18 @@ public class AuthController {
 
     model.addAttribute("user", user);
     model.addAttribute("allUsers", userRepository.findAll());
-    return "/account_templates/my_profile";
+    return "/account_templates/profile";
+  }
+
+  @PostMapping("/update/{id}")
+  public String updateBlog(@PathVariable("id") long id, @Valid User user,
+                           BindingResult result, Model model) {
+    if (result.hasErrors()) {
+      user.setId(id);
+      return "account_templates/profile";
+    }
+
+    userRepository.save(user);
+    return "redirect:/api/auth/profile";
   }
 }

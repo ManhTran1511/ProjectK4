@@ -8,19 +8,17 @@ public class Chef {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String img;
+    private String image;
     private String name;
-    private String chef;
     private String description;
 
     public Chef() {
     }
 
-    public Chef(Long id, String img, String name, String chef, String description) {
+    public Chef(Long id, String image, String name, String description) {
         this.id = id;
-        this.img = img;
+        this.image = image;
         this.name = name;
-        this.chef = chef;
         this.description = description;
     }
 
@@ -32,12 +30,12 @@ public class Chef {
         this.id = id;
     }
 
-    public String getImg() {
-        return img;
+    public String getImage() {
+        return image;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -46,14 +44,6 @@ public class Chef {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getChef() {
-        return chef;
-    }
-
-    public void setChef(String chef) {
-        this.chef = chef;
     }
 
     public String getDescription() {

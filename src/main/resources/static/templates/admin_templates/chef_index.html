@@ -247,7 +247,7 @@
 
                 <!-- Gallery -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/gallery}" class="menu-link">
+                    <a th:href="@{/admin/gallery}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Gallery</div>
                     </a>
@@ -255,7 +255,7 @@
 
                 <!-- About -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/about}" class="menu-link">
+                    <a th:href="@{/admin/about}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">About</div>
                     </a>
@@ -263,7 +263,7 @@
 
                 <!-- Chef -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/chef}" class="menu-link">
+                    <a th:href="@{/admin/chef}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Chef</div>
                     </a>
@@ -405,7 +405,6 @@
                                     <th>ID</th>
                                     <th>Img</th>
                                     <th>Name</th>
-                                    <th>Chef</th>
                                     <th>Description</th>
                                     <th>Actions</th>
                                 </tr>
@@ -413,9 +412,8 @@
                                 <tbody class="table-border-bottom-0">
                                 <tr th:each="chef : ${allChefs}">
                                     <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${chef.id}"> </strong></td>
-                                    <td><img th:src="${chef.img}" style="width: 90px; height: 90px"></td>
+                                    <td><img th:src="${'/admin/chef/files/' + chef.image}" style="height: 90px; width: 90px"/></td>
                                     <td th:text="${chef.name}"></td>
-                                    <td th:text="${chef.chef}"></td>
                                     <td th:text="${chef.description}"></td>
                                     <td>
                                         <div class="dropdown">

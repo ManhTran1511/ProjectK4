@@ -247,7 +247,7 @@
 
         <!-- Gallery -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/gallery}" class="menu-link">
+          <a th:href="@{/admin/gallery}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Gallery</div>
           </a>
@@ -255,7 +255,7 @@
 
         <!-- About -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/about}" class="menu-link">
+          <a th:href="@{/admin/about}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">About</div>
           </a>
@@ -263,7 +263,7 @@
 
         <!-- Chef -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/chef}" class="menu-link">
+          <a th:href="@{/admin/chef}" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Chef</div>
           </a>
@@ -389,20 +389,22 @@
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
 
           <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/admin/chef/update/{id}(id=${chef.id})}" th:object="${chef}" method="post">
+          <form class="col-md-6" th:action="@{/admin/chef/update/{id}(id=${chef.id})}" th:object="${chef}" method="post" enctype="multipart/form-data">
             <div class="card mb-4">
               <h5 class="card-header">Form Controls</h5>
               <div class="card-body">
                 <div class="mb-3">
-                  <label for="img" class="form-label">Img</label>
+                  <label for="file" class="form-label">Image</label>
                   <input
+
                           type="file"
                           class="form-control"
-                          th:field="*{img}"
-                          id="img"
-                          th:placeholder="${chef.img}"
+                          id="file"
+                          placeholder="file"
+                          name="file"
                   />
-                  <span th:if="${#fields.hasErrors('img')}" th:errors="*{img}"></span>
+                  <img th:src="${'/admin/chef/files/' + chef.image}" style="height: 90px; width: 90px"/>
+                  <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                 </div>
 
                 <div class="mb-3">
@@ -415,18 +417,6 @@
                           th:placeholder="${chef.name}"
                   />
                   <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                </div>
-
-                <div class="mb-3">
-                  <label for="chef" class="form-label">Chef</label>
-                  <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{chef}"
-                          id="chef"
-                          th:placeholder="${chef.chef}"
-                  />
-                  <span th:if="${#fields.hasErrors('chef')}" th:errors="*{chef}"></span>
                 </div>
 
                 <div class="mb-3">
