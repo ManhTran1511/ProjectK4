@@ -81,6 +81,7 @@ public class BlogController {
         blogRepository.save(blog);
         return "redirect:/admin/blog";
     }
+
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();
@@ -98,10 +99,21 @@ public class BlogController {
 
     @PostMapping("/update/{id}")
     public String updateBlog(@PathVariable("id") long id, @Valid Blog blog,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model,
+                             @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             blog.setId(id);
             return "admin_templates/blog_edit_form";
+        }
+
+        Blog oldBlog = blogRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Blog Id:" + id));
+
+        if (!file.isEmpty()){
+            storageService.store(file);
+            blog.setImage(file.getOriginalFilename());
+        } else {
+            blog.setImage(oldBlog.getImage());
         }
 
         blogRepository.save(blog);

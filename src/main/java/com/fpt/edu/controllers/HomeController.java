@@ -13,9 +13,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +161,17 @@ public class HomeController {
         model.addAttribute("listContact",contactRepository.findAll());
         return "user_templates/contact";
     }
+
+    @RequestMapping(value = "/contact/add")
+    public String add(@Valid Contact_check contact_check,
+                      BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "user_templates/contact";
+        }
+        contact_checkRepository.save(contact_check);
+        return "redirect:/contact";
+    }
+
 
     // ADMIN ROUTES
     @GetMapping("admin")
