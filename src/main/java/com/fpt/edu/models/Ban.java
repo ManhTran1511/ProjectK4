@@ -1,18 +1,21 @@
 package com.fpt.edu.models;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Table( name = "ban")
+@SQLDelete(sql = "UPDATE ban SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Ban {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String loaiBan;
-
     private int trangThai;
+    private boolean deleted = Boolean.FALSE;
 
     public Ban() {
 
@@ -42,5 +45,11 @@ public class Ban {
         this.trangThai = trangThai;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

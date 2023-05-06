@@ -1,9 +1,14 @@
 package com.fpt.edu.models;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "chef")
+@SQLDelete(sql = "UPDATE chef SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Chef {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -11,15 +16,17 @@ public class Chef {
     private String image;
     private String name;
     private String description;
+    private boolean deleted = Boolean.FALSE;
 
     public Chef() {
     }
 
-    public Chef(Long id, String image, String name, String description) {
+    public Chef(Long id, String image, String name, String description, boolean deleted) {
         this.id = id;
         this.image = image;
         this.name = name;
         this.description = description;
+        this.deleted = deleted;
     }
 
     public Long getId() {
@@ -52,5 +59,13 @@ public class Chef {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

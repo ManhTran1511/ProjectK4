@@ -229,7 +229,6 @@
             <div data-i18n="Analytics">Contact</div>
           </a>
         </li>
-
         <!-- Contact_check -->
         <li class="menu-item">
           <a th:href="@{/admin/contact_check}" class="menu-link">
@@ -387,10 +386,10 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span>Avatar</h4>
 
           <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/admin/chef/update/{id}(id=${chef.id})}" th:object="${chef}" method="post" enctype="multipart/form-data">
+          <form class="col-md-6" th:action="@{/api/auth/update/{id}(id=${user.id})}" th:object="${user}" method="post" enctype="multipart/form-data">
             <div class="card mb-4">
               <h5 class="card-header">Form Controls</h5>
               <div class="card-body">
@@ -405,39 +404,12 @@
                           name="file"
                           required
                   />
-                  <img th:src="${'/admin/chef/files/' + chef.image}" style="height: 90px; width: 90px"/>
+                  <img th:src="${'/admin/user/files/' + user.image}" style="height: 100px; width: 100px"/>
                   <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
                 </div>
 
-                <div class="mb-3">
-                  <label for="name" class="form-label">Name</label>
-                  <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{name}"
-                          id="name"
-                          th:placeholder="${chef.name}"
-                          required
-                  />
-                  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-                </div>
-
-                <div class="mb-3">
-                  <label for="description" class="form-label">Description</label>
-                  <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{description}"
-                          id="description"
-                          th:placeholder="${chef.description}"
-                          required
-                  />
-                  <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-                </div>
-
                 <div class="form-group">
-                  <input type="submit" value="Update Chef" class="btn btn-primary form-control">
-                  <a th:href="@{/admin/chef}" class="btn btn-secondary form-control">Cancel</a>
+                  <input type="submit" value="Update Avatar" class="btn btn-primary form-control">
                 </div>
               </div>
             </div>

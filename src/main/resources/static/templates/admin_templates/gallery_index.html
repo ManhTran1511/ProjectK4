@@ -58,7 +58,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a th:href="@{/admin}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                         width="25"
@@ -229,6 +229,7 @@
                         <div data-i18n="Analytics">Contact</div>
                     </a>
                 </li>
+
                 <!-- Contact_check -->
                 <li class="menu-item">
                     <a th:href="@{/admin/contact_check}" class="menu-link">
@@ -247,7 +248,7 @@
 
                 <!-- Gallery -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/gallery}" class="menu-link">
+                    <a th:href="@{/admin/gallery}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Gallery</div>
                     </a>
@@ -255,7 +256,7 @@
 
                 <!-- About -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/about}" class="menu-link">
+                    <a th:href="@{/admin/about}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">About</div>
                     </a>
@@ -263,7 +264,7 @@
 
                 <!-- Chef -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/chef}" class="menu-link">
+                    <a th:href="@{/admin/chef}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Chef</div>
                     </a>
@@ -367,7 +368,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                    <a class="dropdown-item" th:href="@{/api/auth/logout}">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>

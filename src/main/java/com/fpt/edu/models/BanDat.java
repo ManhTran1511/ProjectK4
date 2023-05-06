@@ -1,5 +1,7 @@
 package com.fpt.edu.models;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -8,22 +10,20 @@ import java.util.Date;
 
 @Entity
 @Table ( name = "bandat")
+@SQLDelete(sql = "UPDATE bandat SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class BanDat {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String tenKhachHang;
     private int ban_id;
-
     private int taiKhoan_id;
     private String sdt;
     private String gioDat;
-
     private String ngayDat;
-
     private int soNguoi;
+    private boolean deleted = Boolean.FALSE;
 
     public BanDat() {
 
@@ -93,4 +93,11 @@ public class BanDat {
         this.soNguoi = soNguoi;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 }

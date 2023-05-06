@@ -32,6 +32,11 @@ public class User {
 	@Size(max = 120)
 	private String password;
 
+	@NotBlank
+	@Size(max = 120)
+	private String image;
+
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(
 			name="users_roles",
@@ -48,10 +53,13 @@ public class User {
 	public User() {
 	}
 
-	public User(String username, String email, String password) {
+	public User(Long id, String username, String email, String password, String image, List<Role> roles) {
+		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.image = image;
+		this.roles = roles;
 	}
 
 	public Long getId() {
@@ -84,6 +92,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public List<Role> getRoles() {

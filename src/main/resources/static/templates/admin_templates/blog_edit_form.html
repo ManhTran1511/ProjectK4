@@ -58,7 +58,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a th:href="@{/admin}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                         width="25"
@@ -248,7 +248,7 @@
 
                 <!-- Gallery -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                    <a th:href="@{/admin/gallery}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">Gallery</div>
                     </a>
@@ -256,14 +256,23 @@
 
                 <!-- About -->
                 <li class="menu-item">
-                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                    <a th:href="@{/admin/about}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-home-circle"></i>
                         <div data-i18n="Analytics">About</div>
                     </a>
                 </li>
 
+                <!-- Chef -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/chef}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Chef</div>
+                    </a>
+                </li>
+
             </ul>
         </aside>
+
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -313,7 +322,7 @@
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
                             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                 <div class="avatar avatar-online">
-                                    <img src="/admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                    <img src="../../admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                 </div>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
@@ -322,7 +331,7 @@
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
-                                                    <img src="/admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                    <img src="../../admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
@@ -335,32 +344,17 @@
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
+                                <!--                <li>-->
+                                <!--                  <a class="dropdown-item" href="#">-->
+                                <!--                    <i class="bx bx-user me-2"></i>-->
+                                <!--                    <span class="align-middle">My Profile</span>-->
+                                <!--                  </a>-->
+                                <!--                </li>-->
+                                <!--                <li>-->
+                                <!--                  <div class="dropdown-divider"></div>-->
+                                <!--                </li>-->
                                 <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-user me-2"></i>
-                                        <span class="align-middle">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="bx bx-cog me-2"></i>
-                                        <span class="align-middle">Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="auth-login-basic.html">
+                                    <a class="dropdown-item" th:href="@{/api/auth/logout}">
                                         <i class="bx bx-power-off me-2"></i>
                                         <span class="align-middle">Log Out</span>
                                     </a>
@@ -396,6 +390,7 @@
                                             th:field="*{name}"
                                             id="name"
                                             placeholder="Name"
+                                            required
                                     />
                                     <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
                                 </div>
@@ -408,6 +403,7 @@
                                             th:field="*{content}"
                                             id="content"
                                             placeholder="content"
+                                            required
                                     />
                                     <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
                                 </div>
@@ -420,6 +416,7 @@
                                             id="file"
                                             placeholder="file"
                                             name="file"
+                                            required
                                     />
                                     <img th:src="${'/admin/blog/files/' + blog.image}" style="height: 90px; width: 90px"/>
 <!--                                    <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>-->

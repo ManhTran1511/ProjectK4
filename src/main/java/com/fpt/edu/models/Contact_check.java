@@ -1,9 +1,14 @@
 package com.fpt.edu.models;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "contact_check")
+@SQLDelete(sql = "UPDATE contact_check SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class Contact_check {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,6 +17,7 @@ public class Contact_check {
     private String email;
     private String phone;
     private String comment;
+    private boolean deleted = Boolean.FALSE;
 
     public Contact_check(){
 
@@ -55,5 +61,13 @@ public class Contact_check {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
