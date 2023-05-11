@@ -1,5 +1,6 @@
 package com.fpt.edu.controllers;
 
+import com.fpt.edu.models.Blog;
 import com.fpt.edu.models.Gallery;
 import com.fpt.edu.repository.GalleryRepository;
 import com.fpt.edu.security.storage.StorageFileNotFoundException;
@@ -100,18 +101,29 @@ public class GalleryController {
 
     @PostMapping("/update/{id}")
     public String updateBlog(@PathVariable("id") long id, @Valid Gallery gallery,
-                             BindingResult result, Model model) {
+                             BindingResult result, Model model,
+                             @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             gallery.setId(id);
             return "admin_templates/gallery_edit_form";
         }
+            Gallery oldGallery = galleryRepository.findById(id)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid Gallery Id:" + id));
 
-        galleryRepository.save(gallery);
-        return "redirect:/admin/gallery";
-    }
+            if (!file.isEmpty()) {
+                storageService.store(file);
+                gallery.setImage(file.getOriginalFilename());
+            } else {
+                gallery.setImage(oldGallery.getImage());
+            }
+
+            galleryRepository.save(gallery);
+            return "redirect:/admin/gallery";
+        }
+
 
     @GetMapping("/delete/{id}")
-    public String deleteBlog(@PathVariable("id") long id, Model model) {
+    public String deleteGallery(@PathVariable("id") long id, Model model) {
         Gallery gallery = galleryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Gallery Id:" + id));
         galleryRepository.delete(gallery);
