@@ -43,8 +43,8 @@ public class WebSecurityConfig {
 				.authorizeHttpRequests((authorize) ->
 						authorize.antMatchers("/api/auth/**").permitAll()
 								.antMatchers("/index").permitAll()
-								.antMatchers("/admin/**").hasRole("ADMIN")
-								.antMatchers("/staff/**").hasRole("STAFF"))
+								.antMatchers("/admin/**").hasAnyRole("ADMIN","STAFF")
+								.antMatchers("/staff/**").hasAnyRole("ADMIN","STAFF"))
 				.formLogin(
 						form -> form
 								.loginPage("/api/auth/login")

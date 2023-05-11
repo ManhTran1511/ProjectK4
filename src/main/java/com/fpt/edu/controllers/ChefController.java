@@ -103,7 +103,7 @@ public class ChefController {
         return "redirect:/admin/chef";
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteChef(@PathVariable("id") long id, Model model) {
         Chef chef = chefRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Chef Id:" + id));

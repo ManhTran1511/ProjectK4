@@ -44,8 +44,8 @@
             <div class="wrap_header trans-0-3">
                 <!-- Logo -->
                 <div class="logo">
-                    <a href="home">
-                        <img src="/user/images/icons/logo.png" alt="IMG-LOGO" data-logofixed="/images/icons/logo2.png">
+                    <a th:href="@{/home}">
+                        <img src="/user/images/icons/logo.png" alt="IMG-LOGO" data-logofixed="/user/images/icons/logo2.png">
                     </a>
                 </div>
 
@@ -54,31 +54,31 @@
                     <nav class="menu">
                         <ul class="main_menu">
                             <li>
-                                <a href="home">Home</a>
+                                <a th:href="@{/home}">Home</a>
                             </li>
 
                             <li>
-                                <a href="menu">Menu</a>
+                                <a th:href="@{/menu}">Menu</a>
                             </li>
 
                             <li>
-                                <a href="reservation">Reservation</a>
+                                <a th:href="@{/reservation}">Reservation</a>
                             </li>
 
                             <li>
-                                <a href="gallery">Gallery</a>
+                                <a th:href="@{/gallery}">Gallery</a>
                             </li>
 
                             <li>
-                                <a href="about">About</a>
+                                <a th:href="@{/about}">About</a>
                             </li>
 
                             <li>
-                                <a href="blog">Blog</a>
+                                <a th:href="@{/blog}">Blog</a>
                             </li>
 
                             <li>
-                                <a href="contact">Feedback</a>
+                                <a th:href="@{/contact}">Feedback</a>
                             </li>
                         </ul>
                     </nav>
@@ -92,6 +92,7 @@
 
                     <button class="btn-show-sidebar m-l-33 trans-0-4"></button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -105,32 +106,32 @@
     <!-- - -->
     <ul class="menu-sidebar p-t-95 p-b-70">
         <li class="t-center m-b-13">
-            <a href="home" class="txt19">Home</a>
+            <a th:href="@{/home}" class="txt19">Home</a>
         </li>
 
         <li class="t-center m-b-13">
-            <a href="menu" class="txt19">Menu</a>
+            <a th:href="@{/menu}" class="txt19">Menu</a>
         </li>
 
         <li class="t-center m-b-13">
-            <a href="gallery" class="txt19">Gallery</a>
+            <a th:href="@{/gallery}" class="txt19">Gallery</a>
         </li>
 
         <li class="t-center m-b-13">
-            <a href="about" class="txt19">About</a>
+            <a th:href="@{/about}" class="txt19">About</a>
         </li>
 
         <li class="t-center m-b-13">
-            <a href="blog" class="txt19">Blog</a>
+            <a th:href="@{/blog}" class="txt19">Blog</a>
         </li>
 
         <li class="t-center m-b-33">
-            <a href="contact" class="txt19">Contact</a>
+            <a th:href="@{/contact}" class="txt19">Feedback</a>
         </li>
 
         <li class="t-center">
             <!-- Button3 -->
-            <a href="reservation" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
+            <a th:href="@{/reservation}" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
                 Reservation
             </a>
         </li>
@@ -184,14 +185,12 @@
     </div>
 </aside>
 
-
 <!-- Title Page -->
 <section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(/user/images/bg-title-page-02.jpg);">
     <h2 class="tit6 t-center">
         Reservation
     </h2>
 </section>
-
 
 <!-- Reservation -->
 <section class="section-reservation bg1-pattern p-t-100 p-b-113">

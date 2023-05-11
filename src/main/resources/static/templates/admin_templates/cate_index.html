@@ -318,40 +318,46 @@
             </li>
 
             <!-- User -->
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+            <li class="nav-item navbar-dropdown dropdown-user dropdown" th:if="${#request.userPrincipal.name != null}">
+              <!--              <div th:if="${user.id}">-->
               <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                 <div class="avatar avatar-online">
-                  <img src="../../admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                  <img src="../../admin/images/favicon.png" alt class="w-px-40 h-auto rounded-circle" />
                 </div>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                  <a class="dropdown-item" href="#">
+                  <a class="dropdown-item">
                     <div class="d-flex">
                       <div class="flex-shrink-0 me-3">
                         <div class="avatar avatar-online">
-                          <img src="../../admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                          <img src="../../admin/images/favicon.png" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <span class="fw-semibold d-block">John Doe</span>
-                        <small class="text-muted">Admin</small>
+                        <span class="fw-semibold d-block" th:text="${#request.userPrincipal.name}"></span>
+                        <small class="text-muted"
+                               th:if="${#request.userPrincipal.name == 'admin@gmail.com'}"
+                               th:text="'admin'"></small>
+                        <small class="text-muted"
+                               th:if="${#request.userPrincipal.name == 'staff@gmail.com'}"
+                               th:text="'staff'"></small>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <div class="dropdown-divider"></div>
+                <!--                  <li>-->
+                <!--                    <div class="dropdown-divider"></div>-->
+                <!--                  </li>-->
+                <!--                  <li>-->
+                <!--                    <a class="dropdown-item" th:href="@{/api/auth/profile/{id}(id=${user.id})}">-->
+                <!--                      <i class="bx bx-user me-2"></i>-->
+                <!--                      <span class="align-middle">Profile</span>-->
+                <!--                    </a>-->
+                <!--                  </li>-->
+                <!--                  <li>-->
+                <div class="dropdown-divider"></div>
                 </li>
-                <!--                <li>-->
-                <!--                  <a class="dropdown-item" href="#">-->
-                <!--                    <i class="bx bx-user me-2"></i>-->
-                <!--                    <span class="align-middle">My Profile</span>-->
-                <!--                  </a>-->
-                <!--                </li>-->
-                <!--                <li>-->
-                <!--                  <div class="dropdown-divider"></div>-->
-                <!--                </li>-->
                 <li>
                   <a class="dropdown-item" th:href="@{/api/auth/logout}">
                     <i class="bx bx-power-off me-2"></i>
@@ -359,6 +365,8 @@
                   </a>
                 </li>
               </ul>
+              <!--              </div>-->
+
             </li>
             <!--/ User -->
           </ul>
@@ -384,7 +392,7 @@
           <!-- Striped Rows -->
           <div class="card">
             <h5 class="card-header">Categories Manager</h5>
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive">
               <table class="table table-striped">
                 <thead>
                 <tr>
@@ -407,9 +415,10 @@
                            th:href="@{/admin/cate/edit/{id}(id=${cate.id})}">
                           <i class="bx bx-edit-alt me-1"></i> Edit</a
                         >
-                        <a class="dropdown-item"
-                           th:href="@{/admin/cate/delete/{id}(id=${cate.id})}">
-                          <i class="bx bx-trash me-1"></i> Delete</a>
+                        <<a class="dropdown-item"
+                            th:data-id="${cate.id}"
+                            onclick="removeRow(this.getAttribute('data-id'), '/admin/cate/delete/' + this.getAttribute('data-id'))">
+                        <i class="bx bx-trash me-1"></i> Delete</a>
                       </div>
                     </div>
                   </td>
@@ -497,5 +506,35 @@
 
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<script>
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
+  function removeRow(id,url){
+    if(confirm('Xóa mà không thể khôi phục. Bạn có chắc?')){
+      $.ajax({
+        type:'DELETE',
+        datatype: 'JSON',
+        data: { id },
+        url : url,
+        success:
+                function (result){
+                  if(result){
+                    alert('Xoa thanh cong');
+                    location.reload();
+                  }else {
+                    alert('Xoa that bai');
+                    location.reload();
+                  }
+                }
+        // error: alert('Xoa that bai'),
+      })
+    }
+  }
+</script>
+
 </body>
 </html>

@@ -1,9 +1,6 @@
 package com.fpt.edu.controllers;
 
-import com.fpt.edu.models.Blog;
-import com.fpt.edu.models.Contact;
-import com.fpt.edu.models.Contact_check;
-import com.fpt.edu.models.Gallery;
+import com.fpt.edu.models.*;
 import com.fpt.edu.repository.*;
 import com.fpt.edu.security.storage.StorageFileNotFoundException;
 import com.fpt.edu.security.storage.StorageService;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -47,6 +45,12 @@ public class HomeController {
     @Autowired
     BlogRepository blogRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
+
     private final StorageService storageService;
 
     @Autowired
@@ -54,8 +58,45 @@ public class HomeController {
         this.storageService = storageService;
     }
 
-
     // USER ROUTES
+    @GetMapping("")
+    public String index(Model model) throws IOException {
+        List<Blog> list3Blogs = new ArrayList<>();
+        int count = 0;
+
+        for(Blog blog : blogRepository.findAll()){
+            if (count < 3){
+                list3Blogs.add(blog);
+                count = count + 1;
+            } else {
+                break;
+            }
+        }
+
+        List<Gallery> list3Galleries = new ArrayList<>();
+        int countGallery = 0;
+
+        for(Gallery gallery : galleryRepository.findAll()){
+            if (countGallery < 3){
+                list3Galleries.add(gallery);
+                countGallery = countGallery + 1;
+            } else {
+                break;
+            }
+        }
+
+        storageService.loadAll().map(
+                        path -> MvcUriComponentsBuilder.fromMethodName(HomeController.class,
+                                "serveFile", path.getFileName().toString()).build().toUri().toString())
+                .collect(Collectors.toList());
+
+        model.addAttribute("list3Blogs", list3Blogs);
+        model.addAttribute("listContact", contactRepository.findAll());
+        model.addAttribute("list3Galleries",list3Galleries );
+
+        return "index";
+    }
+
     @GetMapping("home")
     public String home(Model model) throws IOException {
         List<Blog> list3Blogs = new ArrayList<>();
@@ -90,6 +131,7 @@ public class HomeController {
         model.addAttribute("list3Blogs", list3Blogs);
         model.addAttribute("listContact", contactRepository.findAll());
         model.addAttribute("list3Galleries",list3Galleries );
+
         return "index";
     }
 

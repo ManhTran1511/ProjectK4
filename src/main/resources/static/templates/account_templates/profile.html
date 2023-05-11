@@ -389,10 +389,37 @@
           <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span>Avatar</h4>
 
           <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/api/auth/update/{id}(id=${user.id})}" th:object="${user}" method="post" enctype="multipart/form-data">
+          <form class="col-md-6" th:action="@{/api/auth/update/{id}(id=${user.id})}" th:object="${user}"
+                method="post" enctype="multipart/form-data">
             <div class="card mb-4">
               <h5 class="card-header">Form Controls</h5>
               <div class="card-body">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Username</label>
+                  <input
+                          type="text"
+                          class="form-control"
+                          th:field="*{username}"
+                          id="username"
+                          th:placeholder="${user.username}"
+                          required
+                  />
+                  <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                </div>
+
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                          type="text"
+                          class="form-control"
+                          th:field="*{email}"
+                          id="email"
+                          th:placeholder="${user.email}"
+                          required
+                  />
+                  <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                </div>
+
                 <div class="mb-3">
                   <label for="file" class="form-label">Image</label>
                   <input
@@ -404,8 +431,7 @@
                           name="file"
                           required
                   />
-                  <img th:src="${'/admin/user/files/' + user.image}" style="height: 100px; width: 100px"/>
-                  <span th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></span>
+                  <img th:src="${'/api/auth/files/' + user.image}" style="height: 100px; width: 100px"/>
                 </div>
 
                 <div class="form-group">
