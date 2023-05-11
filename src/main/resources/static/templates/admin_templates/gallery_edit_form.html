@@ -56,9 +56,9 @@
     <div class="layout-container">
         <!-- Menu -->
 
-        <<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-        <div class="app-brand demo">
-            <a th:href="@{/admin}" class="app-brand-link">
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <div class="app-brand demo">
+                <a th:href="@{/admin}" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                         width="25"
@@ -114,164 +114,164 @@
                   </g>
                 </svg>
               </span>
-                <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
-            </a>
-
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-                <i class="bx bx-chevron-left bx-sm align-middle"></i>
-            </a>
-        </div>
-
-        <div class="menu-inner-shadow"></div>
-
-        <ul class="menu-inner py-1">
-            <!-- Dashboard -->
-            <li class="menu-item active">
-                <a th:href="@{/admin}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Dashboard</div>
+                    <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
                 </a>
-            </li>
 
-            <!-- Table Manager-->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Table Manager</span>
-            </li>
-
-            <!-- Table -->
-            <li class="menu-item">
-                <a th:href="@{/admin/ban}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Tables</div>
+                <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                    <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
-            </li>
+            </div>
 
-            <!-- Booking -->
-            <li class="menu-item">
-                <a th:href="@{/staff/booking}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Booking</div>
-                </a>
-            </li>
+            <div class="menu-inner-shadow"></div>
 
-            <!-- Booking Menu -->
-            <li class="menu-item">
-                <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Booking Menu</div>
-                </a>
-            </li>
+            <ul class="menu-inner py-1">
+                <!-- Dashboard -->
+                <li class="menu-item active">
+                    <a th:href="@{/admin}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Dashboard</div>
+                    </a>
+                </li>
 
-            <!-- Menu Manager-->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Menu Manager</span>
-            </li>
+                <!-- Table Manager-->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Table Manager</span>
+                </li>
 
-            <!-- Category -->
-            <li class="menu-item">
-                <a th:href="@{/admin/cate}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Categories</div>
-                </a>
-            </li>
+                <!-- Table -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/ban}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Tables</div>
+                    </a>
+                </li>
 
-            <!-- Food -->
-            <li class="menu-item">
-                <a th:href="@{/admin/food}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Foods</div>
-                </a>
-            </li>
+                <!-- Booking -->
+                <li class="menu-item">
+                    <a th:href="@{/staff/booking}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Booking</div>
+                    </a>
+                </li>
 
-            <!-- Invoice Manager-->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Invoice Manager</span>
-            </li>
+                <!-- Booking Menu -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Booking Menu</div>
+                    </a>
+                </li>
 
-            <!-- Invoice -->
-            <li class="menu-item">
-                <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Invoices</div>
-                </a>
-            </li>
+                <!-- Menu Manager-->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Menu Manager</span>
+                </li>
 
-            <!-- Customer Manager-->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Customer Manager</span>
-            </li>
+                <!-- Category -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/cate}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Categories</div>
+                    </a>
+                </li>
 
-            <!-- Customer Account -->
-            <li class="menu-item">
-                <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Customer Account</div>
-                </a>
-            </li>
+                <!-- Food -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/food}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Foods</div>
+                    </a>
+                </li>
 
-            <!-- Customer Rate -->
-            <li class="menu-item">
-                <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Customer Rate</div>
-                </a>
-            </li>
+                <!-- Invoice Manager-->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Invoice Manager</span>
+                </li>
 
-            <!-- Restaurant info Manager-->
-            <li class="menu-header small text-uppercase">
-                <span class="menu-header-text">Restaurant info Manager</span>
-            </li>
+                <!-- Invoice -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Invoices</div>
+                    </a>
+                </li>
 
-            <!-- Contact -->
-            <li class="menu-item">
-                <a th:href="@{/admin/contact}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Contact</div>
-                </a>
-            </li>
+                <!-- Customer Manager-->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Customer Manager</span>
+                </li>
 
-            <!-- Contact_check -->
-            <li class="menu-item">
-                <a th:href="@{/admin/contact_check}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Contact_check</div>
-                </a>
-            </li>
+                <!-- Customer Account -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Customer Account</div>
+                    </a>
+                </li>
 
-            <!-- Blog -->
-            <li class="menu-item">
-                <a th:href="@{/admin/blog}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Blog</div>
-                </a>
-            </li>
+                <!-- Customer Rate -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Customer Rate</div>
+                    </a>
+                </li>
 
-            <!-- Gallery -->
-            <li class="menu-item">
-                <a th:href="@{/admin/gallery}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Gallery</div>
-                </a>
-            </li>
+                <!-- Restaurant info Manager-->
+                <li class="menu-header small text-uppercase">
+                    <span class="menu-header-text">Restaurant info Manager</span>
+                </li>
 
-            <!-- About -->
-            <li class="menu-item">
-                <a th:href="@{/admin/about}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">About</div>
-                </a>
-            </li>
+                <!-- Contact -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/contact}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Contact</div>
+                    </a>
+                </li>
 
-            <!-- Chef -->
-            <li class="menu-item">
-                <a th:href="@{/admin/chef}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Chef</div>
-                </a>
-            </li>
+                <!-- Contact_check -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/contact_check}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Contact_check</div>
+                    </a>
+                </li>
 
-        </ul>
-    </aside>
+                <!-- Blog -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/blog}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Blog</div>
+                    </a>
+                </li>
+
+                <!-- Gallery -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/gallery}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Gallery</div>
+                    </a>
+                </li>
+
+                <!-- About -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/about}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">About</div>
+                    </a>
+                </li>
+
+                <!-- Chef -->
+                <li class="menu-item">
+                    <a th:href="@{/admin/chef}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                        <div data-i18n="Analytics">Chef</div>
+                    </a>
+                </li>
+
+            </ul>
+        </aside>
         <!-- / Menu -->
 
         <!-- Layout container -->
@@ -304,19 +304,6 @@
                     <!-- /Search -->
 
                     <ul class="navbar-nav flex-row align-items-center ms-auto">
-                        <!-- Place this tag where you want the button to render. -->
-                        <li class="nav-item lh-1 me-3">
-                            <a
-                                    class="github-button"
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free"
-                                    data-icon="octicon-star"
-                                    data-size="large"
-                                    data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                            >Star</a
-                            >
-                        </li>
-
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown" th:if="${#request.userPrincipal.name != null}">
                             <!--              <div th:if="${user.id}">-->
@@ -355,8 +342,8 @@
                                 <!--                      <span class="align-middle">Profile</span>-->
                                 <!--                    </a>-->
                                 <!--                  </li>-->
-                                <!--                  <li>-->
-                                <div class="dropdown-divider"></div>
+                                <li>
+                                    <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" th:href="@{/api/auth/logout}">
@@ -429,34 +416,6 @@
 
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                        </div>
-                        <div>
-                            <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                            <a
-                                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Documentation</a
-                            >
-
-                            <a
-                                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank"
-                                    class="footer-link me-4"
-                            >Support</a
-                            >
-                        </div>
-                    </div>
                 </footer>
                 <!-- / Footer -->
 
@@ -471,15 +430,6 @@
     <div class="layout-overlay layout-menu-toggle"></div>
 </div>
 <!-- / Layout wrapper -->
-
-<div class="buy-now">
-    <a
-            href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
-            target="_blank"
-            class="btn btn-danger btn-buy-now"
-    >Upgrade to Pro</a
-    >
-</div>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->
