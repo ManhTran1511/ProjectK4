@@ -1,12 +1,16 @@
 package com.fpt.edu.controllers;
 
+import com.fpt.edu.models.Ban;
 import com.fpt.edu.models.Blog;
 import com.fpt.edu.models.Gallery;
 import com.fpt.edu.repository.GalleryRepository;
+import com.fpt.edu.security.services.BanService;
+import com.fpt.edu.security.services.GalleryService;
 import com.fpt.edu.security.storage.StorageFileNotFoundException;
 import com.fpt.edu.security.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +32,9 @@ import java.util.stream.Collectors;
 public class GalleryController {
     @Autowired
     GalleryRepository galleryRepository;
+
+    @Autowired
+    private GalleryService galleryService;
 
     private final StorageService storageService;
 
@@ -41,12 +49,65 @@ public class GalleryController {
     }
 
     @RequestMapping(value = "")
-    public String galleryManager(Model model) throws IOException{
+    public String galleryManager(Model model, String keyword) throws IOException{
         storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(GalleryController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList());
         model.addAttribute("listGalleries", galleryRepository.findAll());
+
+        return getOnePage(model, 1, keyword);
+//        return "admin_templates/gallery_index";
+    }
+
+    @GetMapping("page/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage, String keyword) {
+        Page<Gallery> page;
+        int totalPages;
+        long totalItems;
+        List<Gallery> galleryList;
+
+        if (keyword == null || keyword.isEmpty()) {
+            page = galleryService.findPage(currentPage);
+            totalPages = page.getTotalPages();
+            totalItems = page.getTotalElements();
+            galleryList = page.getContent();
+        } else {
+            page = galleryService.findByKeyword(keyword, currentPage);
+            totalPages = page.getTotalPages();
+            totalItems = page.getTotalElements();
+            galleryList = page.getContent();
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("galleryList", galleryList);
+
+
+        return "admin_templates/gallery_index";
+    }
+
+    @GetMapping("/page/{pageNumber}/{field}")
+    public String getPageWithSort(Model model,
+                                  @PathVariable("pageNumber") int currentPage,
+                                  @PathVariable String field,
+                                  @PathParam("sortDir") String sortDir){
+
+        Page<Gallery> page = galleryService.findAllWithSort(field, sortDir, currentPage);
+        List<Gallery> galleryList = page.getContent();
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc")?"desc":"asc");
+        model.addAttribute("galleryList", galleryList);
+
         return "admin_templates/gallery_index";
     }
 
@@ -71,7 +132,7 @@ public class GalleryController {
     public String add(@Valid Gallery gallery,
                       BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-            return "admin_templates/gallery_add_form";
+            return "redirect:/admin/gallery/new?error";
         }
 
         storageService.store(file);
@@ -81,7 +142,7 @@ public class GalleryController {
 //                "You successfully uploaded " + file.getOriginalFilename() +  "!");
 
         galleryRepository.save(gallery);
-        return "redirect:/admin/gallery";
+        return "redirect:/admin/gallery?add";
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
@@ -105,7 +166,7 @@ public class GalleryController {
                              @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             gallery.setId(id);
-            return "admin_templates/gallery_edit_form";
+            return "redirect:/admin/gallery/edit?error";
         }
             Gallery oldGallery = galleryRepository.findById(id)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Gallery Id:" + id));
@@ -118,7 +179,7 @@ public class GalleryController {
             }
 
             galleryRepository.save(gallery);
-            return "redirect:/admin/gallery";
+            return "redirect:/admin/gallery?edit";
         }
 
 
@@ -127,7 +188,7 @@ public class GalleryController {
         Gallery gallery = galleryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Gallery Id:" + id));
         galleryRepository.delete(gallery);
-        return "redirect:/admin/Gallery";
+        return "redirect:/admin/Gallery?delete";
     }
 
 }

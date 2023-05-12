@@ -127,58 +127,70 @@
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-          <a th:href="@{/admin}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
+          </a>
+          <a th:href="@{/staff}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'staff@gmail.com'}">
+            <i class='menu-icon bx bx-task'></i>
+            <div data-i18n="Analytics">Staff</div>
           </a>
         </li>
 
         <!-- Table Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Table Manager</span>
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Table and Booking Manager</span>
         </li>
 
         <!-- Table -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/ban}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class="menu-icon tf-icons bx bx-table"></i>
             <div data-i18n="Analytics">Tables</div>
           </a>
         </li>
 
         <!-- Booking -->
         <li class="menu-item">
-          <a th:href="@{/staff/booking}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/booking}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-bookmark-alt-plus'></i>
             <div data-i18n="Analytics">Booking</div>
           </a>
         </li>
 
         <!-- Booking Menu -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Booking Menu</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bxs-food-menu"></i>-->
+        <!--            <div data-i18n="Analytics">Booking Menu</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Menu Manager-->
-        <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
           <span class="menu-header-text">Menu Manager</span>
         </li>
 
         <!-- Category -->
         <li class="menu-item">
-          <a th:href="@{/admin/cate}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/cate}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-category'></i>
             <div data-i18n="Analytics">Categories</div>
           </a>
         </li>
 
         <!-- Food -->
         <li class="menu-item">
-          <a th:href="@{/admin/food}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/food}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-cookie'></i>
             <div data-i18n="Analytics">Foods</div>
           </a>
         </li>
@@ -190,82 +202,91 @@
 
         <!-- Invoice -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/invoice/index}" class="menu-link">
+            <i class='menu-icon bx bx-receipt'></i>
             <div data-i18n="Analytics">Invoices</div>
           </a>
         </li>
 
         <!-- Customer Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Customer Manager</span>
+
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Feedback Manager</span>
         </li>
 
-        <!-- Customer Account -->
+        <!-- Feed Back -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Account</div>
-          </a>
-        </li>
-
-        <!-- Customer Rate -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Rate</div>
-          </a>
-        </li>
-
-        <!-- Restaurant info Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Restaurant info Manager</span>
-        </li>
-
-        <!-- Contact -->
-        <li class="menu-item">
-          <a th:href="@{/admin/contact}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact</div>
+          <a th:href="@{/admin/contact}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-detail'></i>
+            <div data-i18n="Analytics">Feedback</div>
           </a>
         </li>
 
         <!-- Contact_check -->
         <li class="menu-item">
-          <a th:href="@{/admin/contact_check}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact_check</div>
+          <a th:href="@{/admin/contact_check}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-check'></i>
+            <div data-i18n="Analytics">Feedback Check</div>
           </a>
         </li>
 
+        <!-- Customer Account -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Account</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Customer Rate -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Rate</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Restaurant info Manager-->
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Restaurant info Manager</span>
+        </li>
+
+
         <!-- Blog -->
         <li class="menu-item">
-          <a th:href="@{/admin/blog}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/blog}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-book-content' ></i>
             <div data-i18n="Analytics">Blog</div>
           </a>
         </li>
 
         <!-- Gallery -->
         <li class="menu-item">
-          <a th:href="@{/admin/gallery}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/gallery}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-image' ></i>
             <div data-i18n="Analytics">Gallery</div>
           </a>
         </li>
 
         <!-- About -->
-        <li class="menu-item">
-          <a th:href="@{/admin/about}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">About</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/about}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">About</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Chef -->
         <li class="menu-item">
-          <a th:href="@{/admin/chef}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/chef}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-body' ></i>
             <div data-i18n="Analytics">Chef</div>
           </a>
         </li>
@@ -291,15 +312,17 @@
         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
           <!-- Search -->
           <div class="navbar-nav align-items-center">
-            <div class="nav-item d-flex align-items-center">
-              <i class="bx bx-search fs-4 lh-0"></i>
-              <input
-                      type="text"
-                      class="form-control border-0 shadow-none"
-                      placeholder="Search..."
-                      aria-label="Search..."
+            <form class="nav-item d-flex align-items-center"
+                  th:action="@{/staff/booking}">
+              <button class="btn" type="submit">
+                <i class="bx bx-search fs-4 lh-0"></i>
+              </button>
+              <input type="text" name="keyword"
+                     class="form-control border-0 shadow-none"
+                     placeholder="Search..."
+                     th:value="${keyword}"
               />
-            </div>
+            </form>
           </div>
           <!-- /Search -->
 
@@ -375,54 +398,239 @@
             <a class="btn btn-outline-info" th:href="@{/staff/booking/new}">
               <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Add New
             </a>
+
+            <a class="btn btn-outline-info" th:href="@{/staff}">
+              <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Back
+            </a>
           </div>
           <!-- Striped Rows -->
           <div class="card">
-            <h5 class="card-header">Bookings Manager</h5>
-            <div class="table-responsive text-nowrap">
+            <div class="card-header">
+              <div class="card-header-elements mb-2 border-bottom">
+                <div class="col-md-6">
+                  <h5>Bookings Manager</h5>
+                </div>
+                <div class="col-md-5 text-end">
+                  <a class="btn btn-link text-decoration-underline" th:href="@{'/staff/booking/?keyword=' + ${today}}">
+                    Today
+                  </a>
+                  <a class="text-center">&nbsp;|&nbsp;</a>
+                  <a class="btn btn-link text-decoration-underline" th:href="@{/staff/booking/}">
+                    All
+                  </a>
+                </div>
+              </div>
+              <div class="card-header-elements float-end">
+                <span>
+                  <i class="bx bx-detail"></i>: Detail |
+                  <i class='bx bx-check'></i>: Check In |
+                  <i class="bx bx-x"></i>: Cancel
+                </span>
+              </div>
+            </div>
+
+
+            <div class="table">
               <table class="table table-striped">
                 <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Ten Khach Hang</th>
-                  <th>Sdt</th>
-                  <th>Ngay Dat</th>
-                  <th>Gio Dat</th>
-                  <th>So Nguoi</th>
-                  <th>Tai Khoan</th>
-                  <th>Ban</th>
-                  <th>Actions</th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/id?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    ID
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/tenKhachHang?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Ten Khach Hang
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/sdt?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Sdt
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/ngayDat?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Ngay Dat
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/gioDat?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Gio Dat
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/gioRa?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Gio Ra
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/soNguoi?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    So Nguoi
+                  </th>
+<!--                  <th>-->
+<!--                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/id?sortDir=' + ${reverseSortDir}}">-->
+<!--                      <i class='bx bx-sort'></i>-->
+<!--                    </a>-->
+<!--                    Tai Khoan-->
+<!--                  </th>-->
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/id?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Ban
+                  </th>
+                  <th>
+                    <a th:href="@{'/staff/booking/page/' + ${currentPage} + '/status?sortDir=' + ${reverseSortDir}}">
+                      <i class='bx bx-sort'></i>
+                    </a>
+                    Trang thai
+                  </th>
+                  <th class="text-center">Actions</th>
                 </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                <tr th:each="booking : ${allBookings}">
+                <tr th:each="booking : ${banDatList}">
                   <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong th:text="${booking.id}"> </strong></td>
                   <td th:text="${booking.tenKhachHang}"></td>
                   <td th:text="${booking.sdt}"></td>
                   <td th:text="${booking.ngayDat}"></td>
                   <td th:text="${booking.gioDat}"></td>
+                  <td th:text="${booking.gioRa}"></td>
                   <td th:text="${booking.soNguoi}"></td>
-                  <td th:text="${booking.taiKhoan_id}"></td>
-                  <td th:text="${booking.ban_id}"></td>
+<!--                  <td th:text="${booking.taiKhoan_id}"></td>-->
+                  <td th:each="table : ${allTables}"
+                      th:if="${booking.ban_id == table.id}"
+                      th:text="${table.name}">
+                  </td>
+                  <td th:text="${booking.status}"></td>
                   <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item"
-                           th:href="@{/staff/booking/edit/{id}(id=${booking.id})}">
-                          <i class="bx bx-edit-alt me-1"></i> Edit</a
-                        >
-                        <a class="dropdown-item"
-                           th:data-id="${booking.id}"
-                           onclick="removeRow(this.getAttribute('data-id'), '/admin/booking/delete/' + this.getAttribute('data-id'))">
-                          <i class="bx bx-trash me-1"></i> Delete</a>                      </div>
-                    </div>
+                    <a class="btn btn-icon btn-outline-info" type="button"
+                       th:href="@{/staff/booking/detail/{id}(id=${booking.id})}">
+                      <i class="bx bx-detail"></i></a>
+                    <a class="btn btn-icon btn-outline-info" type="button"
+                       th:href="@{/staff/booking/checkIn/{id}(id=${booking.id})}">
+                      <i class='bx bx-check'></i></a>
+                    <a class="btn btn-icon btn-outline-danger" type="button"
+                       th:href="@{/staff/booking/cancel/{id}(id=${booking.id})}">
+                      <i class="bx bx-x"></i></a>
                   </td>
                 </tr>
                 </tbody>
               </table>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col">
+
+                  Total Items [[${totalItems}]] : Page [[${currentPage}]] of [[${totalPages}]]
+
+                  <div class="demo-inline-spacing">
+                    <!-- Basic Pagination -->
+                    <nav aria-label="Page navigation">
+                      <ul class="pagination" th:if="${keyword == null}">
+                        <li class="page-item first">
+                          <a  class="page-link" th:if="${currentPage > 1}"
+                              th:href="@{/staff/booking/page/1}">
+                            <i class="tf-icon bx bx-chevrons-left"></i>
+                            <span class="page-link" th:unless="${currentPage > 1}">
+                              <i class="tf-icon bx bx-chevrons-left"></i>
+                            </span>
+                          </a>
+                        </li>
+
+                        <li class="page-item prev">
+                          <a class="page-link" th:if="${currentPage > 1}"
+                             th:href="@{'/staff/booking/page/' + ${currentPage - 1}}">
+                            <i class="tf-icon bx bx-chevron-left"></i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage > 1}">
+                            <i class="tf-icon bx bx-chevron-left"></i>
+                          </span>
+                        </li>
+
+                        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                          <a class="page-link" th:href="@{'/staff/booking/page/' + ${i}}">[[${i}]]</a>
+                        </li>
+
+                        <li class="page-item next">
+                          <a class="page-link" th:if="${currentPage < totalPages}"
+                             th:href="@{'/staff/booking/page/' + ${currentPage + 1}}">
+                            <i class="tf-icon bx bx-chevron-right"> </i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage < totalPages}">
+                            <i class="tf-icon bx bx-chevron-right"> </i>
+                          </span>
+                        </li>
+
+                        <li class="page-item last">
+                          <a class="page-link" th:if="${currentPage < totalPages}"
+                             th:href="@{'/staff/booking/page/' + ${totalPages}}">
+                            <i class="tf-icon bx bx-chevrons-right"></i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage < totalPages}">
+                            <i class="tf-icon bx bx-chevrons-right"></i>
+                          </span>
+                        </li>
+                      </ul>
+                      <ul class="pagination" th:if="${keyword != null}">
+                        <li class="page-item first">
+                          <a  class="page-link" th:if="${currentPage > 1}"
+                              th:href="@{'/staff/booking/page/1?keyword=' + ${keyword}}">
+                            <i class="tf-icon bx bx-chevrons-left"></i>
+                            <span class="page-link" th:unless="${currentPage > 1}">
+                              <i class="tf-icon bx bx-chevrons-left"></i>
+                            </span>
+                          </a>
+                        </li>
+
+                        <li class="page-item prev">
+                          <a class="page-link" th:if="${currentPage > 1}"
+                             th:href="@{'/staff/booking/page/' + ${currentPage - 1} + '/?keyword=' + ${keyword}}">
+                            <i class="tf-icon bx bx-chevron-left"></i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage > 1}">
+                            <i class="tf-icon bx bx-chevron-left"></i>
+                          </span>
+                        </li>
+
+                        <li class="page-item" th:each="i: ${#numbers.sequence(1, totalPages)}">
+                          <a class="page-link" th:href="@{'/staff/booking/page/' + ${i} + '/?keyword=' + ${keyword}}">[[${i}]]</a>
+                        </li>
+
+                        <li class="page-item next">
+                          <a class="page-link" th:if="${currentPage < totalPages}"
+                             th:href="@{'/staff/booking/page/' + ${currentPage + 1} + '/?keyword=' + ${keyword}}">
+                            <i class="tf-icon bx bx-chevron-right"> </i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage < totalPages}">
+                            <i class="tf-icon bx bx-chevron-right"> </i>
+                          </span>
+                        </li>
+
+                        <li class="page-item last">
+                          <a class="page-link" th:if="${currentPage < totalPages}"
+                             th:href="@{'/staff/booking/page/' + ${totalPages} + '/?keyword=' + ${keyword}}">
+                            <i class="tf-icon bx bx-chevrons-right"></i>
+                          </a>
+                          <span class="page-link" th:unless="${currentPage < totalPages}">
+                            <i class="tf-icon bx bx-chevrons-right"></i>
+                          </span>
+                        </li>
+                      </ul>
+                    </nav>
+                    <!--/ Basic Pagination -->
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <!--/ Striped Rows -->

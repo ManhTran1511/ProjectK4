@@ -12,19 +12,66 @@
   axisColor = config.colors.axisColor;
   borderColor = config.colors.borderColor;
 
+  // Lay ra nam hien tai
+  const yearNow = parseInt(document.getElementById("yearNow").innerText);
+
+  // Lay ra nam truoc
+  const lastYear = yearNow - 1;
+
+  // Lay ra profit cac thang nam hien tai
+  const profitM1 = parseInt(document.getElementById("profitM1").innerText);
+  const profitM2 = parseInt(document.getElementById("profitM2").innerText);
+  const profitM3 = parseInt(document.getElementById("profitM3").innerText);
+  const profitM4 = parseInt(document.getElementById("profitM4").innerText);
+  const profitM5 = parseInt(document.getElementById("profitM5").innerText);
+  const profitM6 = parseInt(document.getElementById("profitM6").innerText);
+  const profitM7 = parseInt(document.getElementById("profitM7").innerText);
+  const profitM8 = parseInt(document.getElementById("profitM8").innerText);
+  const profitM9 = parseInt(document.getElementById("profitM9").innerText);
+  const profitM10 = parseInt(document.getElementById("profitM10").innerText);
+  const profitM11 = parseInt(document.getElementById("profitM11").innerText);
+  const profitM12 = parseInt(document.getElementById("profitM12").innerText);
+
+  // Lay ra profit nam hien tai va nam truoc
+  const profitYearNow = parseInt(document.getElementById("profitYearNow").innerText);
+  const profitLastYear = parseInt(document.getElementById("profitLastYear").innerText);
+
+  // Lay ti le profit 2 nam
+  const growthRate = document.getElementById("growthRate").innerText;
+
+  // Tao list data
+  const dataList = [];
+
+  // Push list data
+  dataList.push(profitM1);
+  dataList.push(profitM2);
+  dataList.push(profitM3);
+  dataList.push(profitM4);
+  dataList.push(profitM5);
+  dataList.push(profitM6);
+  dataList.push(profitM7);
+  dataList.push(profitM8);
+  dataList.push(profitM9);
+  dataList.push(profitM10);
+  dataList.push(profitM11);
+  dataList.push(profitM12);
+
+  // so sanh cac thang trong 2 nam gan nhat
+  // tinh ra phan tram tai thoi diem hien tai cua 2 nam
+
   // Total Revenue Report Chart - Bar Chart
   // --------------------------------------------------------------------
   const totalRevenueChartEl = document.querySelector('#totalRevenueChart'),
     totalRevenueChartOptions = {
       series: [
         {
-          name: '2021',
-          data: [18, 7, 15, 29, 18, 12, 9]
+          name: yearNow,
+          data: dataList,
         },
-        {
-          name: '2020',
-          data: [-13, -18, -9, -14, -5, -17, -15]
-        }
+        // {
+        //   name: lastYear,
+        //   data: [13, 18, 9, 14, 5, 17, 15]
+        // }
       ],
       chart: {
         height: 300,
@@ -41,7 +88,7 @@
           endingShape: 'rounded'
         }
       },
-      colors: [config.colors.primary, config.colors.info],
+      colors: [config.colors.primary, config.colors.danger],
       dataLabels: {
         enabled: false
       },
@@ -78,7 +125,7 @@
         }
       },
       xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         labels: {
           style: {
             fontSize: '13px',
@@ -278,7 +325,7 @@
   // --------------------------------------------------------------------
   const growthChartEl = document.querySelector('#growthChart'),
     growthChartOptions = {
-      series: [78],
+      series: [growthRate],
       labels: ['Growth'],
       chart: {
         height: 240,

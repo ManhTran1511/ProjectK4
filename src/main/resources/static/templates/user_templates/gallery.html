@@ -203,29 +203,13 @@
         <button class="label-gallery txt26 trans-0-4 is-actived" data-filter="*">
             All Photo
         </button>
-
-<!--        <button class="label-gallery txt26 trans-0-4" data-filter=".interior">-->
-<!--            Interior-->
-<!--        </button>-->
-
-<!--        <button class="label-gallery txt26 trans-0-4" data-filter=".food">-->
-<!--            Food-->
-<!--        </button>-->
-
-<!--        <button class="label-gallery txt26 trans-0-4" data-filter=".events">-->
-<!--            Events-->
-<!--        </button>-->
-
-<!--        <button class="label-gallery txt26 trans-0-4" data-filter=".guests">-->
-<!--            Vip guests-->
-<!--        </button>-->
     </div>
 
     <div class="wrap-gallery isotope-grid flex-w p-l-25 p-r-25">
         <!-- - -->
-        <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom events"
+        <div class="item-gallery isotope-item bo-rad-10 hov-img-zoom events guests"
              th:each="gallery : ${listGalleries}">
-            <img th:src="${'/files/' + gallery.image}" alt="IMG-INTRO"/>
+            <img th:src="${'/files/' + gallery.image}" alt="IMG-GALLERY"/>
             <div class="overlay-item-gallery trans-0-4 flex-c-m">
                 <a class="btn-show-gallery flex-c-m fa fa-search" th:href="${'/files/' + gallery.image}" data-lightbox="gallery"></a>
             </div>

@@ -10,10 +10,15 @@ import javax.persistence.*;
 @SQLDelete(sql = "UPDATE ban SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class Ban {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String loaiBan;
+
+    private String name;
+
+    private int loaiBan;
+
     private int trangThai;
     private boolean deleted = Boolean.FALSE;
 
@@ -29,11 +34,19 @@ public class Ban {
         this.id = id;
     }
 
-    public String getLoaiBan() {
+    public String getName() {
+        return name;
+    }
+
+    public void setname(String name) {
+        this.name = name;
+    }
+
+    public int getLoaiBan() {
         return loaiBan;
     }
 
-    public void setLoaiBan(String loaiBan) {
+    public void setLoaiBan(int loaiBan) {
         this.loaiBan = loaiBan;
     }
 

@@ -134,58 +134,70 @@
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-          <a th:href="@{/admin}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
+          </a>
+          <a th:href="@{/staff}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'staff@gmail.com'}">
+            <i class='menu-icon bx bx-task'></i>
+            <div data-i18n="Analytics">Staff</div>
           </a>
         </li>
 
         <!-- Table Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Table Manager</span>
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Table and Booking Manager</span>
         </li>
 
         <!-- Table -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/ban}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class="menu-icon tf-icons bx bx-table"></i>
             <div data-i18n="Analytics">Tables</div>
           </a>
         </li>
 
         <!-- Booking -->
         <li class="menu-item">
-          <a th:href="@{/staff/booking}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/booking}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-bookmark-alt-plus'></i>
             <div data-i18n="Analytics">Booking</div>
           </a>
         </li>
 
         <!-- Booking Menu -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Booking Menu</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bxs-food-menu"></i>-->
+        <!--            <div data-i18n="Analytics">Booking Menu</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Menu Manager-->
-        <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
           <span class="menu-header-text">Menu Manager</span>
         </li>
 
         <!-- Category -->
         <li class="menu-item">
-          <a th:href="@{/admin/cate}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/cate}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-category'></i>
             <div data-i18n="Analytics">Categories</div>
           </a>
         </li>
 
         <!-- Food -->
         <li class="menu-item">
-          <a th:href="@{/admin/food}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/food}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-cookie'></i>
             <div data-i18n="Analytics">Foods</div>
           </a>
         </li>
@@ -197,82 +209,91 @@
 
         <!-- Invoice -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/invoice/index}" class="menu-link">
+            <i class='menu-icon bx bx-receipt'></i>
             <div data-i18n="Analytics">Invoices</div>
           </a>
         </li>
 
         <!-- Customer Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Customer Manager</span>
+
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Feedback Manager</span>
         </li>
 
-        <!-- Customer Account -->
+        <!-- Feed Back -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Account</div>
-          </a>
-        </li>
-
-        <!-- Customer Rate -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Rate</div>
-          </a>
-        </li>
-
-        <!-- Restaurant info Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Restaurant info Manager</span>
-        </li>
-
-        <!-- Contact -->
-        <li class="menu-item">
-          <a th:href="@{/admin/contact}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact</div>
+          <a th:href="@{/admin/contact}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-detail'></i>
+            <div data-i18n="Analytics">Feedback</div>
           </a>
         </li>
 
         <!-- Contact_check -->
         <li class="menu-item">
-          <a th:href="@{/admin/contact_check}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact_check</div>
+          <a th:href="@{/admin/contact_check}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-check'></i>
+            <div data-i18n="Analytics">Feedback Check</div>
           </a>
         </li>
 
+        <!-- Customer Account -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Account</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Customer Rate -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Rate</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Restaurant info Manager-->
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Restaurant info Manager</span>
+        </li>
+
+
         <!-- Blog -->
         <li class="menu-item">
-          <a th:href="@{/admin/blog}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/blog}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-book-content' ></i>
             <div data-i18n="Analytics">Blog</div>
           </a>
         </li>
 
         <!-- Gallery -->
         <li class="menu-item">
-          <a th:href="@{/admin/gallery}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/gallery}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-image' ></i>
             <div data-i18n="Analytics">Gallery</div>
           </a>
         </li>
 
         <!-- About -->
-        <li class="menu-item">
-          <a th:href="@{/admin/about}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">About</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/about}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">About</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Chef -->
         <li class="menu-item">
-          <a th:href="@{/admin/chef}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/chef}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-body' ></i>
             <div data-i18n="Analytics">Chef</div>
           </a>
         </li>
@@ -349,8 +370,8 @@
                 <!--                      <span class="align-middle">Profile</span>-->
                 <!--                    </a>-->
                 <!--                  </li>-->
-                                  <li>
-                <div class="dropdown-divider"></div>
+                <li>
+                 <div class="dropdown-divider"></div>
                 </li>
                 <li>
                   <a class="dropdown-item" th:href="@{/api/auth/logout}">
@@ -374,79 +395,120 @@
         <!-- Content -->
 
         <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Add New Table</h4>
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Admin /</span> Edit Booking</h4>
+          <a class="btn btn-outline-info" th:href="@{/staff/booking}">
+            <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Back
+          </a>
+          <div th:each="tableName : ${tableNameList}">
+            <span  th:id="${tableName}"
+                   th:value="${tableName}"
+                   th:text="${tableName}"> </span>
+            <a th:href="@{/staff/booking/drop/{name}(name=${tableName})}">
+              <i class='bx bx-minus-circle'></i>
+            </a>
+          </div>
+          <div class="col-md-12">
+            <!-- Form controls -->
+            <div class="card col-md-6 float-start">
+              <form class="form-control" th:action="@{/staff/booking/checkEdit}" th:object="${banDat}" method="post">
+                <div class="card mb-4">
+                  <h5 class="card-header">Form Controls</h5>
+                  <div class="card-body">
+                    <div class="form-group mb-3">
+                      <label for="ngayDat" class="col-md-2 col-form-label">Date</label>
+                      <div class="form-group mb-3">
+                        <span>
+                          <input class="form-control" type="date"
+                                 th:field="*{ngayDat}"
+                                 th:value="${banDat.ngayDat}"
+                                 id="ngayDat"
+                                 required/>
+                        </span>
+                      </div>
+                      <span th:if="${#fields.hasErrors('ngayDat')}" th:errors="*{ngayDat}"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="gioDat" class="form-label">Time</label>
+                      <div class="form-group mb-3">
+                        <input class="form-control" type="text"
+                               th:placeholder="${banDat.gioDat}"
+                               th:field="*{gioDat}" id="gioDat"
+                               required/>
+                      </div>
+                      <span th:if="${#fields.hasErrors('gioDat')}" th:errors="*{gioDat}"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="soNguoi" class="form-label">People</label>
+                      <!-- Select2 -->
+                      <input class="form-control" name="soNguoi"
+                             type="number" th:field="*{soNguoi}"
+                             th:value="${banDat.soNguoi}"
+                             id="soNguoi" required>
+                      <span th:if="${#fields.hasErrors('soNguoi')}" th:errors="*{soNguoi}"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                      <label for="tenKhachHang" class="form-label">Customer's Name</label>
+                      <input
+                              type="text"
+                              class="form-control"
+                              th:field="*{tenKhachHang}"
+                              th:placeholder="${banDat.tenKhachHang}"
+                              id="tenKhachHang"
+                              placeholder="Customer's Name"
+                              required />
+                      <span th:if="${#fields.hasErrors('tenKhachHang')}" th:errors="*{tenKhachHang}"></span>
+                    </div>
+                    <div class="mb-3">
+                      <label for="sdt" class="form-label">Phone Number</label>
+                      <input
+                              type="text"
+                              class="form-control"
+                              th:field="*{sdt}"
+                              th:placeholder="${banDat.sdt}"
+                              id="sdt"
+                              placeholder="Phone Number"
+                              required />
+                      <span th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></span>
+                    </div>
 
-          <!-- Form controls -->
-          <form class="col-md-6" th:action="@{/staff/booking/update/{id}(id=${banDat.id})}" th:object="${banDat}" method="post">
-            <div class="card mb-4">
-              <h5 class="card-header">Form Controls</h5>
-              <div class="card-body">
-                <div class="form-group mb-3">
-                  <label for="ngayDat" class="col-md-2 col-form-label">Date</label>
-                  <div class="form-group mb-3">
-                    <input class="form-control" type="date"
-                           th:field="*{ngayDat}"
-                           th:value="${banDat.ngayDat}"
-                           id="ngayDat" required/>
+                    <div class="form-group">
+                      <input type="submit" value="Check" class="btn btn-primary form-control">
+                      <a th:href="@{/staff/booking}" class="btn btn-secondary form-control">Cancel</a>
+                    </div>
                   </div>
-                  <span th:if="${#fields.hasErrors('ngayDat')}" th:errors="*{ngayDat}"></span>
                 </div>
-                <div class="form-group mb-3">
-                  <label for="gioDat" class="form-label">Time</label>
-                  <div class="form-group mb-3">
-                    <input class="form-control" type="time"
-                           th:value="${banDat.gioDat}"
-                           th:field="*{gioDat}"
-                           id="gioDat" required/>
-                  </div>
-                  <span th:if="${#fields.hasErrors('gioDat')}" th:errors="*{gioDat}"></span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="soNguoi" class="form-label">People</label>
-                  <!-- Select2 -->
-                  <select class="selection-1 form-select" name="soNguoi" th:field="*{soNguoi}" id="soNguoi" aria-label="Default select example">
-                    <option th:value="${banDat.soNguoi}" selected></option>
-                    <option value="1">1 person</option>
-                    <option value="2">2 people</option>
-                    <option value="3">3 people</option>
-                    <option value="4">4 people</option>
-                    <option value="5">5 people</option>
-                    <option value="6">6 people</option>
-                  </select>
-                  <span th:if="${#fields.hasErrors('soNguoi')}" th:errors="*{soNguoi}"></span>
-                </div>
-                <div class="form-group mb-3">
-                  <label for="tenKhachHang" class="form-label">Customer's Name</label>
-                  <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{tenKhachHang}"
-                          id="tenKhachHang"
-                          th:placeholder="${banDat.tenKhachHang}"
-                          required
-                  />
-                  <span th:if="${#fields.hasErrors('tenKhachHang')}" th:errors="*{tenKhachHang}"></span>
-                </div>
-                <div class="mb-3">
-                  <label for="sdt" class="form-label">Phone Number</label>
-                  <input
-                          type="text"
-                          class="form-control"
-                          th:field="*{sdt}"
-                          id="sdt"
-                          th:placeholder="${banDat.sdt}"
-                          required
-                  />
-                  <span th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></span>
-                </div>
-
-                <div class="form-group">
-                  <input type="submit" value="Update Booking" class="btn btn-primary form-control">
-                  <a th:href="@{/admin/staff}" class="btn btn-secondary form-control">Cancel</a>
-                </div>
-              </div>
+              </form>
             </div>
-          </form>
+
+            <div class="card col-md-6">
+              <form class="form-control" th:action="@{/staff/booking/add}" th:object="${banDat}">
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5>Table</h5>
+                    <h5>Free Slot: <span th:text="${freeSlot}"></span></h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row gy-3">
+                      <div class="col-md-3" th:each="ban : ${listBanCheck}">
+                        <div class="form-check form-check-inline mt-3">
+                          <input class="form-check-input"
+                                 type="checkbox" name="tableBookingList"
+                                 th:id="${ban.id}" th:field="*{tablesBooking}"
+                                 th:value="${ban.name}" required/>
+                          <label class="form-check-label" th:text="${ban.name}"></label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input type="submit" value="Add New Booking" class="btn btn-primary form-control">
+                    <a th:href="@{/staff/booking}" class="btn btn-secondary form-control">Cancel</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
 
           <hr class="my-5" />
         </div>

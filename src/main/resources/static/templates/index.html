@@ -326,9 +326,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -346,7 +343,6 @@
                 Our Menu
             </h3>
         </div>
-
         <div class="row">
             <div class="col-md-8">
                 <div class="row">
@@ -396,16 +392,14 @@
                             <img src="/user/images/our-menu-10.jpg" alt="IMG-MENU">
 
                             <!-- Button2 -->
-                            <a th:href="@{/menu}" class="btn2 flex-c-m txt5 ab-c-m size8">
-                                Khai vi
+                            <a href="@{/menu}" class="btn2 flex-c-m txt5 ab-c-m size8">
+                                Starters
                             </a>
                         </div>
                     </div>
                     </div>
                 </div>
-            </div>
         </div>
-
     </div>
 </section>
 
@@ -696,7 +690,9 @@
                     </h3>
                 </div>
 
-                <form class="wrap-form-booking">
+                <form class="wrap-form-booking"
+                      th:action="@{/reservation/add}" th:object="${banDat}"
+                      method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <!-- Date -->
@@ -705,8 +701,14 @@
 								</span>
 
                             <div class="wrap-inputdate pos-relative txt10 size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input class="my-calendar bo-rad-10 sizefull txt10 p-l-20" type="text" name="date">
-                                <i class="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18" aria-hidden="true"></i>
+                                <input class="bo-rad-10 sizefull txt10 p-l-20" type="date"
+                                       name="ngayDat" id="ngayDat" th:field="*{ngayDat}" required>
+<!--                                <i class="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18" aria-hidden="true"></i>-->
+
+<!--                                <input class="form-control bo-rad-10 sizefull txt10 p-l-20" type="date"-->
+<!--                                       th:field="*{ngayDat}"-->
+<!--                                       id="ngayDat" required/>-->
+                                <span th:if="${#fields.hasErrors('ngayDat')}" th:errors="*{ngayDat}"></span>
                             </div>
 
                             <!-- Time -->
@@ -716,27 +718,14 @@
 
                             <div class="wrap-inputtime size12 bo2 bo-rad-10 m-t-3 m-b-23">
                                 <!-- Select2 -->
-                                <select class="selection-1" name="time">
-                                    <option>9:00</option>
-                                    <option>9:30</option>
-                                    <option>10:00</option>
-                                    <option>10:30</option>
-                                    <option>11:00</option>
-                                    <option>11:30</option>
-                                    <option>12:00</option>
-                                    <option>12:30</option>
-                                    <option>13:00</option>
-                                    <option>13:30</option>
-                                    <option>14:00</option>
-                                    <option>14:30</option>
-                                    <option>15:00</option>
-                                    <option>15:30</option>
-                                    <option>16:00</option>
-                                    <option>16:30</option>
-                                    <option>17:00</option>
-                                    <option>17:30</option>
-                                    <option>18:00</option>
-                                </select>
+                                <input class="bo-rad-10 sizefull txt10 p-l-20 p-r-15"
+                                       type="time"
+                                       th:field="*{gioDat}"
+                                       id="gioDat"
+                                       name="gioDat"
+                                       th:placeholder="${time}"
+                                       required />
+                                <span th:if="${#fields.hasErrors('gioDat')}" th:errors="*{gioDat}"></span>
                             </div>
 
                             <!-- People -->
@@ -746,49 +735,54 @@
 
                             <div class="wrap-inputpeople size12 bo2 bo-rad-10 m-t-3 m-b-23">
                                 <!-- Select2 -->
-                                <select class="selection-1" name="people">
-                                    <option>1 person</option>
-                                    <option>2 people</option>
-                                    <option>3 people</option>
-                                    <option>4 people</option>
-                                    <option>5 people</option>
-                                    <option>6 people</option>
-                                    <option>7 people</option>
-                                    <option>8 people</option>
-                                    <option>9 people</option>
-                                    <option>10 people</option>
-                                    <option>11 people</option>
-                                    <option>12 people</option>
-                                </select>
+                                <input class="bo-rad-10 sizefull txt10 p-l-20"
+                                       type="text"
+                                       th:field="*{soNguoi}"
+                                       id="soNguoi"
+                                       placeholder="1"
+                                       min="1"
+                                       required/>
+                                <span th:if="${#fields.hasErrors('soNguoi')}" th:errors="*{soNguoi}"></span>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <!-- Name -->
                             <span class="txt9">
-									Name
-								</span>
+                                Name
+                            </span>
 
                             <div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Name">
+                                <input  class="bo-rad-10 sizefull txt10 p-l-20"
+                                        type="text"
+                                        th:field="*{tenKhachHang}"
+                                        id="tenKhachHang"
+                                        placeholder="Name"
+                                        required />
+                                <span th:if="${#fields.hasErrors('tenKhachHang')}" th:errors="*{tenKhachHang}"></span>
                             </div>
 
                             <!-- Phone -->
                             <span class="txt9">
-									Phone
-								</span>
+                                Phone
+                            </span>
 
                             <div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="phone" placeholder="Phone">
+                                <input  class="bo-rad-10 sizefull txt10 p-l-20"
+                                        type="text"
+                                        th:field="*{sdt}"
+                                        id="sdt"
+                                        placeholder="Phone Number"
+                                        required />
+                                <span th:if="${#fields.hasErrors('sdt')}" th:errors="*{sdt}"></span>
                             </div>
 
                             <!-- Email -->
-                            <span class="txt9">
-									Email
-								</span>
+                               <span class="txt9">
+                                   Email
+                               </span>
 
                             <div class="wrap-inputemail size12 bo2 bo-rad-10 m-t-3 m-b-23">
-                                <input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Email">
+                                <input class="bo-rad-10 sizefull txt10 p-l-20" type="email" name="email" id="email" placeholder="Email" disabled>
                             </div>
                         </div>
                     </div>
@@ -833,30 +827,19 @@
                 <div class="wrap-content-slide3 p-b-50 p-t-50">
                     <div class="container">
                         <div class="pic-review size14 bo4 wrap-cir-pic m-l-r-auto animated visible-false" data-appear="zoomIn">
-                            <img src="user/images/avatar-05.jpg" alt="IGM-AVATAR">
+                            <img src="/user/images/user_avatar.png" alt="IGM-AVATAR">
                         </div>
 
                         <div class="content-review m-t-33 animated visible-false" data-appear="fadeInUp"
                         >
                             <p class="t-center txt12 size15 m-l-r-auto"  th:text="${contact.comment}">
                             </p>
-
-                            <!--                            <div class="star-review fs-18 color0 flex-c-m m-t-12">-->
-                            <!--                                <i class="fa fa-star" aria-hidden="true"></i>-->
-                            <!--                                <i class="fa fa-star p-l-1" aria-hidden="true"></i>-->
-                            <!--                                <i class="fa fa-star p-l-1" aria-hidden="true"></i>-->
-                            <!--                                <i class="fa fa-star p-l-1" aria-hidden="true"></i>-->
-                            <!--                                <i class="fa fa-star p-l-1" aria-hidden="true"></i>-->
-                            <!--                            </div>-->
-
                             <div class="more-review txt4 t-center animated visible-false m-t-32" data-appear="fadeInUp" th:text="${contact.name}">
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
         <div class="wrap-slick3-dots m-t-30"></div>
@@ -912,7 +895,7 @@
                             <h4 class="txt5 color0-hov trans-0-4 m-b-13" th:text="${gallery.name}" >
                         </h4></a>
                         <a href="gallery" class="txt4">
-                            Read
+                            More
                             <i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
                         </a>
                     </div>

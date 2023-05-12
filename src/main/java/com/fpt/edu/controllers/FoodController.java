@@ -1,14 +1,18 @@
 package com.fpt.edu.controllers;
 
 import com.fpt.edu.models.Blog;
+import com.fpt.edu.models.BanDat;
 import com.fpt.edu.models.Category;
 import com.fpt.edu.models.Food;
 import com.fpt.edu.repository.CategoryRepository;
 import com.fpt.edu.repository.FoodRepository;
+import com.fpt.edu.security.services.BanDatService;
+import com.fpt.edu.security.services.FoodService;
 import com.fpt.edu.security.storage.StorageFileNotFoundException;
 import com.fpt.edu.security.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,6 +38,9 @@ public class FoodController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    private FoodService foodService;
 
     private final StorageService storageService;
 
@@ -48,13 +56,65 @@ public class FoodController {
     }
 
     @RequestMapping(value = "")
-    public String foodManager(Model model) throws IOException {
+    public String foodManager(Model model, String keyword) throws IOException {
         storageService.loadAll().map(
                         path -> MvcUriComponentsBuilder.fromMethodName(FoodController.class,
                                 "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList());
         model.addAttribute("listFoods", foodRepository.findAll());
         model.addAttribute("allCates", categoryRepository.findAll());
+        return getOnePage(model, 1, keyword);
+    }
+
+    @GetMapping("page/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage, String keyword) {
+        Page<Food> page;
+        int totalPages;
+        long totalItems;
+        List<Food> foodsList;
+
+        if (keyword == null || keyword.isEmpty()) {
+            page = foodService.findPage(currentPage);
+            totalPages = page.getTotalPages();
+            totalItems = page.getTotalElements();
+            foodsList = page.getContent();
+        } else {
+            page = foodService.findByKeyword(keyword, currentPage);
+            totalPages = page.getTotalPages();
+            totalItems = page.getTotalElements();
+            foodsList = page.getContent();
+        }
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+        model.addAttribute("foodsList", foodsList);
+        model.addAttribute("allCates", categoryRepository.findAll());
+
+        return "admin_templates/food_index";
+    }
+
+    @GetMapping("/page/{pageNumber}/{field}")
+    public String getPageWithSort(Model model,
+                                  @PathVariable("pageNumber") int currentPage,
+                                  @PathVariable String field,
+                                  @PathParam("sortDir") String sortDir){
+
+        Page<Food> page = foodService.findAllWithSort(field, sortDir, currentPage);
+        List<Food> foodsList = page.getContent();
+        int totalPages = page.getTotalPages();
+        long totalItems = page.getTotalElements();
+
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
+
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", sortDir.equals("asc")?"desc":"asc");
+        model.addAttribute("foodsList", foodsList);
+        model.addAttribute("allCates", categoryRepository.findAll());
+
         return "admin_templates/food_index";
     }
 
@@ -79,13 +139,13 @@ public class FoodController {
     public String add(@Valid Food food,
                       BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-            return "admin_templates/food_add_form";
+            return "redirect:/admin/food/new?eror";
         }
         storageService.store(file);
 
         food.setImage(file.getOriginalFilename());
         foodRepository.save(food);
-        return "redirect:/admin/food";
+        return "redirect:/admin/food?add";
     }
     @ExceptionHandler(StorageFileNotFoundException.class)
     public ResponseEntity<?> handleStorageFileNotFound(StorageFileNotFoundException exc) {
@@ -108,7 +168,7 @@ public class FoodController {
                              @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             food.setId(id);
-            return "admin_templates/food_edit_form";
+            return "redirect:/admin/food/edit?error";
         }
         Food oldFood = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Food Id:" + id));
@@ -122,7 +182,7 @@ public class FoodController {
 
 
         foodRepository.save(food);
-        return "redirect:/admin/food";
+        return "redirect:/admin/food?edit";
     }
 
     @GetMapping("/delete/{id}")
@@ -130,6 +190,6 @@ public class FoodController {
         Food food = foodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Food Id:" + id));
         foodRepository.delete(food);
-        return "redirect:/admin/food";
+        return "redirect:/admin/food?delete";
     }
 }

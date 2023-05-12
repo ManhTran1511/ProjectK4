@@ -5,8 +5,12 @@ import org.hibernate.annotations.Where;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Null;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table ( name = "bandat")
@@ -17,13 +21,17 @@ public class BanDat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String tenKhachHang;
-    private int ban_id;
+    private Long ban_id;
     private int taiKhoan_id;
     private String sdt;
     private String gioDat;
+    private String gioRa;
     private String ngayDat;
     private int soNguoi;
+    private String status;
     private boolean deleted = Boolean.FALSE;
+
+    private String[] tablesBooking;
 
     public BanDat() {
 
@@ -37,11 +45,11 @@ public class BanDat {
         this.id = id;
     }
 
-    public int getBan_id() {
+    public Long getBan_id() {
         return ban_id;
     }
 
-    public void setBan_id(int ban_id) {
+    public void setBan_id(Long ban_id) {
         this.ban_id = ban_id;
     }
 
@@ -85,12 +93,27 @@ public class BanDat {
         this.ngayDat = ngayDat;
     }
 
+    public String getGioRa() {
+        return gioRa;
+    }
+
+    public void setGioRa(String gioRa) {
+        this.gioRa = gioRa;
+    }
+
     public int getSoNguoi() {
         return soNguoi;
     }
 
     public void setSoNguoi(int soNguoi) {
         this.soNguoi = soNguoi;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public boolean isDeleted() {
@@ -100,4 +123,12 @@ public class BanDat {
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
+    public String[] getTablesBooking() {
+        return tablesBooking;
+    }
+
+    public void setTablesBooking(String[] tablesBooking) {
+        this.tablesBooking = tablesBooking;
+    }
+
 }

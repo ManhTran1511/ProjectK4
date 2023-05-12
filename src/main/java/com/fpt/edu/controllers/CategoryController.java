@@ -40,10 +40,10 @@ public class CategoryController {
     public String add(@Valid Category cate,
                       BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "admin_templates/cate_add_form";
+            return "redirect:/admin/cate/new?error";
         }
         categoryRepository.save(cate);
-        return "redirect:/admin/cate";
+        return "redirect:/admin/cate?add";
     }
 
     @GetMapping("/edit/{id}")
@@ -61,11 +61,11 @@ public class CategoryController {
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
             cate.setId(id);
-            return "admin_templates/cate_edit_form";
+            return "redirect:/admin/cate/edit?error";
         }
 
         categoryRepository.save(cate);
-        return "redirect:/admin/cate";
+        return "redirect:/admin/cate?edit";
     }
 
     @GetMapping("/delete/{id}")
@@ -73,6 +73,6 @@ public class CategoryController {
         Category cate = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Category Id:" + id));
         categoryRepository.delete(cate);
-        return "redirect:/admin/cate";
+        return "redirect:/admin/cate?delete";
     }
 }

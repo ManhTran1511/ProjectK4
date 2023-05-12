@@ -67,7 +67,7 @@ public class ChefController {
     public String add(@Valid Chef chef,
                       BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
-            return "admin_templates/gallery_add_form";
+            return "redirect:/admin/chef/new?error";
         }
 
         storageService.store(file);
@@ -75,7 +75,7 @@ public class ChefController {
         chef.setImage(file.getOriginalFilename());
 
         chefRepository.save(chef);
-        return "redirect:/admin/chef";
+        return "redirect:/admin/chef?success";
     }
 
     @GetMapping("/edit/{id}")
@@ -93,14 +93,14 @@ public class ChefController {
                              BindingResult result, Model model, @RequestParam("file") MultipartFile file) {
         if (result.hasErrors()) {
             chef.setId(id);
-            return "admin_templates/chef_edit_form";
+            return "redirect:/admin/chef/edit?error";
         }
 
         storageService.store(file);
 
         chef.setImage(file.getOriginalFilename());
         chefRepository.save(chef);
-        return "redirect:/admin/chef";
+        return "redirect:/admin/chef?edit";
     }
 
     @DeleteMapping("/delete/{id}")
@@ -108,6 +108,6 @@ public class ChefController {
         Chef chef = chefRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid Chef Id:" + id));
         chefRepository.delete(chef);
-        return "redirect:/admin/chef";
+        return "redirect:/admin/chef?delete";
     }
 }

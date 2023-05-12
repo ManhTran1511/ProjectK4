@@ -129,58 +129,70 @@
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-          <a th:href="@{/admin}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
+          </a>
+          <a th:href="@{/staff}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'staff@gmail.com'}">
+            <i class='menu-icon bx bx-task'></i>
+            <div data-i18n="Analytics">Staff</div>
           </a>
         </li>
 
         <!-- Table Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Table Manager</span>
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Table and Booking Manager</span>
         </li>
 
         <!-- Table -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/ban}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class="menu-icon tf-icons bx bx-table"></i>
             <div data-i18n="Analytics">Tables</div>
           </a>
         </li>
 
         <!-- Booking -->
         <li class="menu-item">
-          <a th:href="@{/staff/booking}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/booking}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-bookmark-alt-plus'></i>
             <div data-i18n="Analytics">Booking</div>
           </a>
         </li>
 
         <!-- Booking Menu -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Booking Menu</div>
-          </a>
-        </li>
+<!--        <li class="menu-item">-->
+<!--          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">-->
+<!--            <i class="menu-icon tf-icons bx bxs-food-menu"></i>-->
+<!--            <div data-i18n="Analytics">Booking Menu</div>-->
+<!--          </a>-->
+<!--        </li>-->
 
         <!-- Menu Manager-->
-        <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
           <span class="menu-header-text">Menu Manager</span>
         </li>
 
         <!-- Category -->
         <li class="menu-item">
-          <a th:href="@{/admin/cate}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/cate}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-category'></i>
             <div data-i18n="Analytics">Categories</div>
           </a>
         </li>
 
         <!-- Food -->
         <li class="menu-item">
-          <a th:href="@{/admin/food}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/food}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-cookie'></i>
             <div data-i18n="Analytics">Foods</div>
           </a>
         </li>
@@ -192,82 +204,91 @@
 
         <!-- Invoice -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/invoice/index}" class="menu-link">
+            <i class='menu-icon bx bx-receipt'></i>
             <div data-i18n="Analytics">Invoices</div>
           </a>
         </li>
 
         <!-- Customer Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Customer Manager</span>
+
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Feedback Manager</span>
         </li>
 
-        <!-- Customer Account -->
+        <!-- Feed Back -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Account</div>
-          </a>
-        </li>
-
-        <!-- Customer Rate -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Rate</div>
-          </a>
-        </li>
-
-        <!-- Restaurant info Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Restaurant info Manager</span>
-        </li>
-
-        <!-- Contact -->
-        <li class="menu-item">
-          <a th:href="@{/admin/contact}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact</div>
+          <a th:href="@{/admin/contact}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-detail'></i>
+            <div data-i18n="Analytics">Feedback</div>
           </a>
         </li>
 
         <!-- Contact_check -->
         <li class="menu-item">
-          <a th:href="@{/admin/contact_check}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact_check</div>
+          <a th:href="@{/admin/contact_check}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-check'></i>
+            <div data-i18n="Analytics">Feedback Check</div>
           </a>
         </li>
 
+        <!-- Customer Account -->
+<!--        <li class="menu-item">-->
+<!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+<!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+<!--            <div data-i18n="Analytics">Customer Account</div>-->
+<!--          </a>-->
+<!--        </li>-->
+
+        <!-- Customer Rate -->
+<!--        <li class="menu-item">-->
+<!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+<!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+<!--            <div data-i18n="Analytics">Customer Rate</div>-->
+<!--          </a>-->
+<!--        </li>-->
+
+        <!-- Restaurant info Manager-->
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Restaurant info Manager</span>
+        </li>
+
+
         <!-- Blog -->
         <li class="menu-item">
-          <a th:href="@{/admin/blog}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/blog}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-book-content' ></i>
             <div data-i18n="Analytics">Blog</div>
           </a>
         </li>
 
         <!-- Gallery -->
         <li class="menu-item">
-          <a th:href="@{/admin/gallery}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/gallery}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-image' ></i>
             <div data-i18n="Analytics">Gallery</div>
           </a>
         </li>
 
         <!-- About -->
-        <li class="menu-item">
-          <a th:href="@{/admin/about}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">About</div>
-          </a>
-        </li>
+<!--        <li class="menu-item">-->
+<!--          <a th:href="@{/admin/about}" class="menu-link">-->
+<!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+<!--            <div data-i18n="Analytics">About</div>-->
+<!--          </a>-->
+<!--        </li>-->
 
         <!-- Chef -->
         <li class="menu-item">
-          <a th:href="@{/admin/chef}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/chef}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-body' ></i>
             <div data-i18n="Analytics">Chef</div>
           </a>
         </li>
@@ -345,8 +366,8 @@
 <!--                    </a>-->
 <!--                  </li>-->
                   <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
+<!--                    <div class="dropdown-divider"></div>-->
+<!--                  </li>-->
                   <li>
                     <a class="dropdown-item" th:href="@{/api/auth/logout}">
                       <i class="bx bx-power-off me-2"></i>
@@ -375,13 +396,13 @@
                 <div class="d-flex align-items-end row">
                   <div class="col-sm-7">
                     <div class="card-body">
-                      <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
-                      <p class="mb-4">
-                        You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                        your profile.
+                      <h5 class="card-title text-primary">Congratulations! 🎉</h5>
+                      <p class="mb-3 fw-bold"
+                         th:text="'You made ' + ${todayProfit} + '$ today. Check your new invoices in  your invoices management page. '">
                       </p>
 
-                      <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+
+                      <a th:href="@{/staff/invoice/index}" class="btn btn-sm btn-outline-primary">View Invoices</a>
                     </div>
                   </div>
                   <div class="col-sm-5 text-center text-sm-left">
@@ -400,7 +421,7 @@
             </div>
             <div class="col-lg-4 col-md-4 order-1">
               <div class="row">
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-6 col-md-12 col-6">
                   <div class="card">
                     <div class="card-body">
                       <div class="card-title d-flex align-items-start justify-content-between">
@@ -429,12 +450,12 @@
                         </div>
                       </div>
                       <span class="fw-semibold d-block mb-1">Profit</span>
-                      <h3 class="card-title mb-2">$12,628</h3>
-                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                      <h3 class="card-title mb-2" id="profitYearNow" th:text="'$' + ${profitYearNow}"></h3>
+<!--                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>-->
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-6 mb-4">
+                <div class="col-lg-6 col-md-12 col-6">
                   <div class="card">
                     <div class="card-body">
                       <div class="card-title d-flex align-items-start justify-content-between">
@@ -463,15 +484,15 @@
                         </div>
                       </div>
                       <span>Sales</span>
-                      <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                      <h3 class="card-title text-nowrap" id="salesCountYearNow" th:text="${salesCountYearNow} + ' orders'"></h3>
+<!--                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>-->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Total Revenue -->
-            <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
+            <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
               <div class="card">
                 <div class="row row-bordered g-0">
                   <div class="col-md-8">
@@ -483,25 +504,24 @@
                       <div class="text-center">
                         <div class="dropdown">
                           <button
-                                  class="btn btn-sm btn-outline-primary dropdown-toggle"
+                                  class="btn btn-sm btn-outline-primary"
                                   type="button"
                                   id="growthReportId"
                                   data-bs-toggle="dropdown"
                                   aria-haspopup="true"
-                                  aria-expanded="false"
-                          >
-                            2022
+                                  aria-expanded="false" disabled>
+                            <span th:text="${yearNow}"></span>
                           </button>
-                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                            <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                            <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                            <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                          </div>
+<!--                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">2021</a>-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">2020</a>-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">2019</a>-->
+<!--                          </div>-->
                         </div>
                       </div>
                     </div>
                     <div id="growthChart"></div>
-                    <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
+                    <div class="text-center fw-semibold pt-3 mb-2">Company Growth</div>
 
                     <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
                       <div class="d-flex">
@@ -509,17 +529,35 @@
                           <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
                         </div>
                         <div class="d-flex flex-column">
-                          <small>2022</small>
-                          <h6 class="mb-0">$32.5k</h6>
+                          <small th:text="${yearNow}"></small>
+                          <h6 class="mb-0" th:text="${profitYearNow}"></h6>
                         </div>
                       </div>
                       <div class="d-flex">
                         <div class="me-2">
-                          <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
+                          <span class="badge bg-label-info p-2"><i class="bx bx-dollar text-info"></i></span>
                         </div>
                         <div class="d-flex flex-column">
-                          <small>2021</small>
-                          <h6 class="mb-0">$41.2k</h6>
+                          <small th:text="${lastYear}"></small>
+                          <h6 class="mb-0" th:text="${profitLastYear}"></h6>
+                          <div hidden="hidden">
+                            <p id="yearNow" th:text="${yearNow}"></p>
+                            <p id="profitM1" th:text="${profitM1}"></p>
+                            <p id="profitM2" th:text="${profitM2}"></p>
+                            <p id="profitM3" th:text="${profitM3}"></p>
+                            <p id="profitM4" th:text="${profitM4}"></p>
+                            <p id="profitM5" th:text="${profitM5}"></p>
+                            <p id="profitM6" th:text="${profitM6}"></p>
+                            <p id="profitM7" th:text="${profitM7}"></p>
+                            <p id="profitM8" th:text="${profitM8}"></p>
+                            <p id="profitM9" th:text="${profitM9}"></p>
+                            <p id="profitM10" th:text="${profitM10}"></p>
+                            <p id="profitM11" th:text="${profitM11}"></p>
+                            <p id="profitM12" th:text="${profitM12}"></p>
+                            <p id="profitLastYear" th:text="${profitLastYear}"></p>
+                            <p id="salesCountLastYear" th:text="${salesCountLastYear}"></p>
+                            <p id="growthRate" th:text="${growthRate}"></p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -528,93 +566,111 @@
               </div>
             </div>
             <!--/ Total Revenue -->
-            <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-              <div class="row">
-                <div class="col-6 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="card-title d-flex align-items-start justify-content-between">
-                        <div class="avatar flex-shrink-0">
-                          <img src="../../admin/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="dropdown">
-                          <button
-                                  class="btn p-0"
-                                  type="button"
-                                  id="cardOpt4"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                          >
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="d-block mb-1">Payments</span>
-                      <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-                      <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="card-title d-flex align-items-start justify-content-between">
-                        <div class="avatar flex-shrink-0">
-                          <img src="../../admin/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="dropdown">
-                          <button
-                                  class="btn p-0"
-                                  type="button"
-                                  id="cardOpt1"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false"
-                          >
-                            <i class="bx bx-dots-vertical-rounded"></i>
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                            <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                          </div>
-                        </div>
-                      </div>
-                      <span class="fw-semibold d-block mb-1">Transactions</span>
-                      <h3 class="card-title mb-2">$14,857</h3>
-                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
-                    </div>
-                  </div>
-                </div>
-                <!-- </div>
-<div class="row"> -->
-                <div class="col-12 mb-4">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">
-                        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
-                          <div class="card-title">
-                            <h5 class="text-nowrap mb-2">Profile Report</h5>
-                            <span class="badge bg-label-warning rounded-pill">Year 2021</span>
-                          </div>
-                          <div class="mt-sm-auto">
-                            <small class="text-success text-nowrap fw-semibold"
-                            ><i class="bx bx-chevron-up"></i> 68.2%</small
-                            >
-                            <h3 class="mb-0">$84,686k</h3>
-                          </div>
-                        </div>
-                        <div id="profileReportChart"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!--            <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">-->
+<!--              <div class="row">-->
+<!--                <div class="col-6 mb-4">-->
+<!--                  <div class="card">-->
+<!--                    <div class="card-body">-->
+<!--                      <div class="card-title d-flex align-items-start justify-content-between">-->
+<!--                        <div class="avatar flex-shrink-0">-->
+<!--                          <img src="../../admin/assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded" />-->
+<!--                        </div>-->
+<!--                        <div class="dropdown">-->
+<!--                          <button-->
+<!--                                  class="btn p-0"-->
+<!--                                  type="button"-->
+<!--                                  id="cardOpt4"-->
+<!--                                  data-bs-toggle="dropdown"-->
+<!--                                  aria-haspopup="true"-->
+<!--                                  aria-expanded="false"-->
+<!--                          >-->
+<!--                            <i class="bx bx-dots-vertical-rounded"></i>-->
+<!--                          </button>-->
+<!--                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">View More</a>-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <span>Booking</span>-->
+<!--                      <h3 class="card-title text-nowrap" th:text="${bookingsCount} + ' times'"></h3>-->
+<!--&lt;!&ndash;                      <small class="text-danger fw-semibold"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                <div class="col-6 mb-4">-->
+<!--                  <div class="card">-->
+<!--                    <div class="card-body">-->
+<!--                      <div class="card-title d-flex align-items-start justify-content-between">-->
+<!--                        <div class="avatar flex-shrink-0">-->
+<!--                          <img src="../../admin/assets/img/icons/unicons/cc-primary.png" alt="Credit Card" class="rounded" />-->
+<!--                        </div>-->
+<!--                        <div class="dropdown">-->
+<!--                          <button-->
+<!--                                  class="btn p-0"-->
+<!--                                  type="button"-->
+<!--                                  id="cardOpt1"-->
+<!--                                  data-bs-toggle="dropdown"-->
+<!--                                  aria-haspopup="true"-->
+<!--                                  aria-expanded="false"-->
+<!--                          >-->
+<!--                            <i class="bx bx-dots-vertical-rounded"></i>-->
+<!--                          </button>-->
+<!--                          <div class="dropdown-menu" aria-labelledby="cardOpt1">-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">View More</a>-->
+<!--                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                      </div>-->
+<!--                      <span class="fw-semibold d-block mb-1">FeedBack</span>-->
+<!--                      <h3 class="card-title mb-2" th:text="${feedBacksCount} + ' times'"></h3>-->
+<!--                      <div hidden="hidden">-->
+<!--                        <p id="yearNow" th:text="${yearNow}"></p>-->
+<!--                        <p id="profitM1" th:text="${profitM1}"></p>-->
+<!--                        <p id="profitM2" th:text="${profitM2}"></p>-->
+<!--                        <p id="profitM3" th:text="${profitM3}"></p>-->
+<!--                        <p id="profitM4" th:text="${profitM4}"></p>-->
+<!--                        <p id="profitM5" th:text="${profitM5}"></p>-->
+<!--                        <p id="profitM6" th:text="${profitM6}"></p>-->
+<!--                        <p id="profitM7" th:text="${profitM7}"></p>-->
+<!--                        <p id="profitM8" th:text="${profitM8}"></p>-->
+<!--                        <p id="profitM9" th:text="${profitM9}"></p>-->
+<!--                        <p id="profitM10" th:text="${profitM10}"></p>-->
+<!--                        <p id="profitM11" th:text="${profitM11}"></p>-->
+<!--                        <p id="profitM12" th:text="${profitM12}"></p>-->
+<!--                        <p id="profitLastYear" th:text="${profitLastYear}"></p>-->
+<!--                        <p id="salesCountLastYear" th:text="${salesCountLastYear}"></p>-->
+<!--                        <p id="growthRate" th:text="${growthRate}"></p>-->
+<!--                      </div>-->
+<!--&lt;!&ndash;                      <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>&ndash;&gt;-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--                &lt;!&ndash; </div>-->
+<!--<div class="row"> &ndash;&gt;-->
+<!--                <div class="col-12 mb-4">-->
+<!--                  <div class="card">-->
+<!--                    <div class="card-body">-->
+<!--                      <div class="d-flex justify-content-between flex-sm-row flex-column gap-3">-->
+<!--                        <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">-->
+<!--                          <div class="card-title">-->
+<!--                            <h5 class="text-nowrap mb-2">Profile Report</h5>-->
+<!--                            <span class="badge bg-label-warning rounded-pill">Year 2021</span>-->
+<!--                          </div>-->
+<!--                          <div class="mt-sm-auto">-->
+<!--                            <small class="text-success text-nowrap fw-semibold"-->
+<!--                            ><i class="bx bx-chevron-up"></i> 68.2%</small-->
+<!--                            >-->
+<!--                            <h3 class="mb-0">$84,686k</h3>-->
+<!--                          </div>-->
+<!--                        </div>-->
+<!--                        <div id="profileReportChart"></div>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
           <div class="row">
             <!-- Order Statistics -->

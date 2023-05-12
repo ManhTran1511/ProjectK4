@@ -14,7 +14,7 @@
           content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
   />
 
-  <title>Tables - Basic Tables | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+  <title>Cate Manager</title>
 
   <meta name="description" content="" />
 
@@ -127,58 +127,70 @@
       <ul class="menu-inner py-1">
         <!-- Dashboard -->
         <li class="menu-item active">
-          <a th:href="@{/admin}" class="menu-link">
+          <a th:href="@{/admin}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
+          </a>
+          <a th:href="@{/staff}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'staff@gmail.com'}">
+            <i class='menu-icon bx bx-task'></i>
+            <div data-i18n="Analytics">Staff</div>
           </a>
         </li>
 
         <!-- Table Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Table Manager</span>
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Table and Booking Manager</span>
         </li>
 
         <!-- Table -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/ban}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class="menu-icon tf-icons bx bx-table"></i>
             <div data-i18n="Analytics">Tables</div>
           </a>
         </li>
 
         <!-- Booking -->
         <li class="menu-item">
-          <a th:href="@{/staff/booking}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/booking}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-bookmark-alt-plus'></i>
             <div data-i18n="Analytics">Booking</div>
           </a>
         </li>
 
         <!-- Booking Menu -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Booking Menu</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bxs-food-menu"></i>-->
+        <!--            <div data-i18n="Analytics">Booking Menu</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Menu Manager-->
-        <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
           <span class="menu-header-text">Menu Manager</span>
         </li>
 
         <!-- Category -->
         <li class="menu-item">
-          <a th:href="@{/admin/cate}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/cate}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-category'></i>
             <div data-i18n="Analytics">Categories</div>
           </a>
         </li>
 
         <!-- Food -->
         <li class="menu-item">
-          <a th:href="@{/admin/food}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/food}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-cookie'></i>
             <div data-i18n="Analytics">Foods</div>
           </a>
         </li>
@@ -190,82 +202,91 @@
 
         <!-- Invoice -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/staff/invoice/index}" class="menu-link">
+            <i class='menu-icon bx bx-receipt'></i>
             <div data-i18n="Analytics">Invoices</div>
           </a>
         </li>
 
         <!-- Customer Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Customer Manager</span>
+
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Feedback Manager</span>
         </li>
 
-        <!-- Customer Account -->
+        <!-- Feed Back -->
         <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Account</div>
-          </a>
-        </li>
-
-        <!-- Customer Rate -->
-        <li class="menu-item">
-          <a th:href="@{/admin/ban/quanlyban}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Customer Rate</div>
-          </a>
-        </li>
-
-        <!-- Restaurant info Manager-->
-        <li class="menu-header small text-uppercase">
-          <span class="menu-header-text">Restaurant info Manager</span>
-        </li>
-
-        <!-- Contact -->
-        <li class="menu-item">
-          <a th:href="@{/admin/contact}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact</div>
+          <a th:href="@{/admin/contact}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-detail'></i>
+            <div data-i18n="Analytics">Feedback</div>
           </a>
         </li>
 
         <!-- Contact_check -->
         <li class="menu-item">
-          <a th:href="@{/admin/contact_check}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">Contact_check</div>
+          <a th:href="@{/admin/contact_check}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-comment-check'></i>
+            <div data-i18n="Analytics">Feedback Check</div>
           </a>
         </li>
 
+        <!-- Customer Account -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Account</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Customer Rate -->
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/ban}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">Customer Rate</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
+
+        <!-- Restaurant info Manager-->
+        <li class="menu-header small text-uppercase"
+            th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+          <span class="menu-header-text">Restaurant info Manager</span>
+        </li>
+
+
         <!-- Blog -->
         <li class="menu-item">
-          <a th:href="@{/admin/blog}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/blog}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-book-content' ></i>
             <div data-i18n="Analytics">Blog</div>
           </a>
         </li>
 
         <!-- Gallery -->
         <li class="menu-item">
-          <a th:href="@{/admin/gallery}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/gallery}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-image' ></i>
             <div data-i18n="Analytics">Gallery</div>
           </a>
         </li>
 
         <!-- About -->
-        <li class="menu-item">
-          <a th:href="@{/admin/about}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
-            <div data-i18n="Analytics">About</div>
-          </a>
-        </li>
+        <!--        <li class="menu-item">-->
+        <!--          <a th:href="@{/admin/about}" class="menu-link">-->
+        <!--            <i class="menu-icon tf-icons bx bx-home-circle"></i>-->
+        <!--            <div data-i18n="Analytics">About</div>-->
+        <!--          </a>-->
+        <!--        </li>-->
 
         <!-- Chef -->
         <li class="menu-item">
-          <a th:href="@{/admin/chef}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+          <a th:href="@{/admin/chef}" class="menu-link"
+             th:if="${#request.userPrincipal.name == 'admin@gmail.com'}">
+            <i class='menu-icon bx bx-body' ></i>
             <div data-i18n="Analytics">Chef</div>
           </a>
         </li>
@@ -371,6 +392,21 @@
             <h4>
               <span class="text-muted fw-light">Admin /</span> Category Manager
             </h4>
+            <div th:if="${param.add}">
+              <div class="alert alert-success">
+                Add new success!
+              </div>
+            </div>
+            <div th:if="${param.edit}">
+              <div class="alert alert-success">
+                Edit success!
+              </div>
+            </div>
+            <div th:if="${param.delete}">
+              <div class="alert alert-success">
+                Delete success!
+              </div>
+            </div>
 
             <a class="btn btn-outline-info" th:href="@{/admin/cate/new}">
               <span class="tf-icons bx bx-pie-chart-alt"></span>&nbsp; Add New
@@ -403,8 +439,9 @@
                           <i class="bx bx-edit-alt me-1"></i> Edit</a
                         >
                         <<a class="dropdown-item"
-                            th:data-id="${cate.id}"
-                            onclick="removeRow(this.getAttribute('data-id'), '/admin/cate/delete/' + this.getAttribute('data-id'))">
+                            th:href="@{/admin/cate/delete/{id}(id=${cate.id})}">
+<!--                            th:data-id="${cate.id}"-->
+<!--                            onclick="removeRow(this.getAttribute('data-id'), '/admin/cate/delete/' + this.getAttribute('data-id'))">-->
                         <i class="bx bx-trash me-1"></i> Delete</a>
                       </div>
                     </div>
